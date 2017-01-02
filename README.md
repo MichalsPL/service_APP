@@ -5,6 +5,7 @@ LISTA STRON APLIKACJI
 Użytkownik niezalogowany 
 
 tylko strona logowania 
+
 --------------------------------
 użytkownik 
 
