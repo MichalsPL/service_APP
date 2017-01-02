@@ -1,3 +1,7 @@
+APLIKAJCA DO ZARZĄDZANIA SERWISEM MOTOCYKLOWYM
+
+Front-end zostanie wykonany na bazie SB ADMIN2
+
 Poniżej opis poszczególnych stron
 LISTA STRON APLIKACJI
 
@@ -7,7 +11,7 @@ Użytkownik niezalogowany
 tylko strona logowania 
 
 --------------------------------
-użytkownik 
+UŻYTKOWNIK 
 
 --Strona główna
 
@@ -42,7 +46,7 @@ wszystkie dane w formulażu do ich edycji
 
 
 -------------------------------------------------------
---strona managera 
+MANAGER
 
 --menu górne
 pasek górny tylko ikona użytkownika 
@@ -94,19 +98,25 @@ zlecenia
 wyświetla wszystkie zlecenia, powala szukać zleceń wg wybranych kryteriów
 
 --strona tworzenia zlecenia - tworzy zlecenie w 6 krokach
- -pozwala wybrać użytkownika z listy lub dodać nowego użytkownika(strona 1)
- -pozala wybrać motocykl z listy lub dodać nowy motocykl (strona 2)
- -pozwla ustalić : status zlecenia, planowaną datę rozpoczęcia i zakończeia prac, mechanika,   managera, (strona3)
- -pozwala dodać czynności serwisowe nazwa + cena ( na bieżąco wyświetla sumę kosztów), (strona 4)
- -pozwala dodać części nazwa + cena + ilość (na bierząco wyświetla sumę kosztów),(strona 5)
- -wyświetla podsumowanie zlecenia (motocykl, czynności serwisowe, akcje serwisowe) pozwala przejść na stronę edycji czynności oraz części, pozwala dodać komentarz użytkownika i komentarz managera
+
+ --pozwala wybrać użytkownika z listy lub dodać nowego użytkownika(strona 1)
+ 
+ --pozala wybrać motocykl z listy lub dodać nowy motocykl (strona 2)
+ 
+ --pozwla ustalić : status zlecenia, planowaną datę rozpoczęcia i zakończeia prac, mechanika,   managera, (strona3)
+ 
+ --pozwala dodać czynności serwisowe nazwa + cena ( na bieżąco wyświetla sumę kosztów), (strona 4)
+ 
+ --pozwala dodać części nazwa + cena + ilość (na bierząco wyświetla sumę kosztów),(strona 5)
+ 
+ --wyświetla podsumowanie zlecenia (motocykl, czynności serwisowe, akcje serwisowe) pozwala przejść na stronę edycji czynności oraz części, pozwala dodać komentarz użytkownika i komentarz managera
 
 
 --strona edycji zlecenia 
  -pozwala edytować zlecenie oprócz użytkownika i motocykla. 
 
 ----------------------------------------------------
-strona mechanika 
+MECHANIK
 
 --pasek górny 
 tylko edycja swoich danych 
@@ -152,7 +162,7 @@ pozwala wyśietlic zlecenie bez możliwości edycji
 
 
 ---
-admin 
+ADMIN
 
 --wszystkie strony jak dla managera
 
