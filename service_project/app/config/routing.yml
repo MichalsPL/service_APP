@@ -7,7 +7,7 @@ fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
     
 Customer_registration:
-    path:  /addCustomer
+    path:  /manager/addCustomer
     defaults: { _controller: ServiceBundle:RegistrationCustomer:register }
 
 Employee_registration:

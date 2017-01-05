@@ -15,7 +15,7 @@ class RegistrationCustomerFormType extends AbstractType
         $builder->add('name');
         $builder->add('surname');
         $builder->add('phoneNo');
-      
+
     }
 
     public function getParent()

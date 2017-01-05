@@ -63,7 +63,7 @@
 {
     parent::__construct();
     
-    $this->roles = array('ROLE_MANAGER');
+    $this->roles = array('ROLE_USER');
 }
 
         /**

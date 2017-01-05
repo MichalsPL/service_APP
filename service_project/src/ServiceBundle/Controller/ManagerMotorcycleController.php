@@ -126,12 +126,12 @@
         }
 
         /**
-         * @Route("/modifyMotorcycle/{id}", requirements={"id": "\d+"}, name="manager_modify_motorcycle")
+         * @Route("/modifyMotorcycle/{motorcycleId}", requirements={"id": "\d+"}, name="manager_modify_motorcycle")
          * @Method({"GET"})
          */
-        public function modifyMotorcycleFormAction($id) {
+        public function modifyMotorcycleFormAction($motorcycleId) {
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
-            $motorcycle = $repository->findOneById($id);
+            $motorcycle = $repository->findOneById($motorcycleId);
             $form = $this->createMotorcycleForm($motorcycle);
             return $this->render('ServiceBundle:Manager/Motorcycle:add_motorcycle.html.twig', array(
                         'form' => $form->createView(),
@@ -140,12 +140,12 @@
         }
 
         /**
-         * @Route("/modifyMotorcycle/{id}", requirements={"id": "\d+"})
+         * @Route("/modifyMotorcycle/{motorcycleId}", requirements={"motorcycleId": "\d+"})
          * @Method({"POST"})
          */
-        public function modifyMotorcycleAction(Request $request, $id) {
+        public function modifyMotorcycleAction(Request $request, $motorcycleId) {
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
-            $motorcycle = $repository->findOneById($id);
+            $motorcycle = $repository->findOneById($motorcycleId);
             $form = $this->createMotorcycleForm($motorcycle);
             $form->handleRequest($request);
             if ($form->isValid()) {

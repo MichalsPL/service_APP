@@ -28,7 +28,7 @@
                             {% else%}
                                 odd gradeX 
                             {%endif%}
-                            " name="click" data-href="{{ path('userShowOrder', { 'id': order.id }) }}">
+                            " name="click" data-href="{{ path('order_checkout', { 'orderId': order.id }) }}">
                             <td>{{order.motorcycle.make}}</td>
                             <td>{{order.motorcycle.model}}</td>
                             <td>{{order.motorcycle.regPlate}}</td>

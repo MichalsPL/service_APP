@@ -533,6 +533,39 @@
             ));
         }
 
+          /**
+         * @Route("/orderCheckout/{orderId}")
+         * @Method({"POST"})
+         * 
+         */
+        public function orderCheckoutAction(Request $request, $orderId) {
+
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
+            $serviceOrder = $repository->findOneById($orderId);
+
+            $form = $this->createFormBuilder($serviceOrder)
+                    ->add('userComments', null, array('attr' => array('class' => 'form-control')))
+                    ->add('ManagerComments', null, array('attr' => array('class' => 'form-control')))
+                    ->add('save', 'submit', array('label' => 'zatwierdź'))
+                    ->getForm();
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $serviceOrder = $form->getData();
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($serviceOrder);
+                $em->flush();
+                $message = "dodałeś nowe zlecenie";
+            } else {
+
+                $message = "zlecenie  nie zostało dodane";
+            }
+
+            return $this->render('ServiceBundle:Manager:service_order_checkout_final.html.twig', array(
+                        'message' => $message
+            ));
+        }
+
                /**
          * @Route("/editServicePart/{partId}", name="manager_edit_part")
          * @Method({"GET"})
@@ -595,39 +628,6 @@
 
                   return $this->redirectToRoute('order_checkout', array(
                         'orderId' => $deleted->getServiceOrder()->getId()
-            ));
-        }
-        
-        /**
-         * @Route("/orderCheckout/{orderId}")
-         * @Method({"POST"})
-         * 
-         */
-        public function orderCheckoutAction(Request $request, $orderId) {
-
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
-            $serviceOrder = $repository->findOneById($orderId);
-
-            $form = $this->createFormBuilder($serviceOrder)
-                    ->add('userComments', null, array('attr' => array('class' => 'form-control')))
-                    ->add('ManagerComments', null, array('attr' => array('class' => 'form-control')))
-                    ->add('save', 'submit', array('label' => 'zatwierdź'))
-                    ->getForm();
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $serviceOrder = $form->getData();
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($serviceOrder);
-                $em->flush();
-                $message = "dodałeś nowe zlecenie";
-            } else {
-
-                $message = "zlecenie  nie zostało dodane";
-            }
-
-            return $this->render('ServiceBundle:Manager:service_order_checkout_final.html.twig', array(
-                        'message' => $message
             ));
         }
 
