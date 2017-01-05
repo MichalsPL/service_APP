@@ -4,6 +4,7 @@
     <div class="panel-body">
         
         {% if orders is defined %}
+            {%if orders|length >0 %}
             <h4>Widzisz {{message}}</h4>
             <h6> klikinj w zecenie żeby zobaczyć szczegóły</h6>
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -39,6 +40,9 @@
                     {%endfor%}
                 </tbody>
             </table>
+                {%else%}
+                    <h4>Nie ma żadnych zleceń w bazie</h4>
+             {%endif%}         
         {%endif%}         
     </div>
 {% endblock %}

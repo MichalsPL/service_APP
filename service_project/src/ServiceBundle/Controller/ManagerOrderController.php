@@ -120,7 +120,7 @@
             if ($form->isValid()) {
                 $motorcycleId = $form->getData()->getMotorcycle()->getId();
 
-                return $this->redirectToRoute('addServiceOrder', array(
+                return $this->redirectToRoute('manager_add_service_order', array(
                             'motorcycleId' => $motorcycleId
                 ));
             } else {
@@ -507,7 +507,7 @@
         }
 
         /**
-         * @Route("/show_all_orders")
+         * @Route("/show_all_orders", name="manager_show_all_orders")
          */
         public function showAllOrdersAction() {
 
@@ -524,7 +524,7 @@
             return $this->render('ServiceBundle:Manager:show_orders.html.twig', array(
                         'orders' => $orders,
                         'message' => $message,
-                        'status' => $order
+//                        'status' => $order
             ));
         }
 

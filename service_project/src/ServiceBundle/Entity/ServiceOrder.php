@@ -129,6 +129,7 @@ class ServiceOrder
     private $orderStatus;
 
     function __construct() {
+         $this->serviceActions = new ArrayCollection();
         $this->usedParts = new ArrayCollection();
     }
 
