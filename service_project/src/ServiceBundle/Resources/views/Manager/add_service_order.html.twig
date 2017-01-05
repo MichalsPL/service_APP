@@ -1,0 +1,15 @@
+{% extends "ServiceBundle:Manager:base_manager.html.twig" %}
+{% block page_content %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    {% if message is defined%}
+        {{dump(message)}}
+        {%endif%}
+        
+         {% if user is defined%}
+        {{dump(user)}}
+        {%endif%}
+{% endblock %}

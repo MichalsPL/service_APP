@@ -1,27 +1,35 @@
 APLIKAJCA DO ZARZĄDZANIA SERWISEM MOTOCYKLOWYM
 
+W FOLDERZE service_project znajduje się akyualna wersja aplikacji 
+nie jest gotowa 
+
+
+
 Front-end zostanie wykonany na bazie SB ADMIN2
+Logika Użykownika FOS UserBundle
+Logika Dla różnych typów użytkowników PUGXMultiUserBundle
 
 Poniżej opis poszczególnych stron
+
 LISTA STRON APLIKACJI
 
 
 Użytkownik niezalogowany 
 
-tylko strona logowania 
+tylko strona logowania - OK działa
 
 --------------------------------
 UŻYTKOWNIK 
 
---Strona główna
+--Strona główna - OK działa
 
-pasek górny tylko ikona użytkownika 
+pasek górny tylko ikona użytkownika -OK działa
 zmiana ustawień użytkownika 
-wyloguj 
+wyloguj - OK działa
 
  w treści strony 
-listę wszystkich motocykli
-listę wszystkich zleceń
+listę wszystkich motocykli - OK działa
+listę wszystkich zleceń - OK działa
 
 --strona motocykla 
 pozwala zobaczyć zczegóóły motocykla - nie pozwala na ich edycje

@@ -1,0 +1,15 @@
+service:
+    resource: "@ServiceBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    
+Customer_registration:
+    path:  /addCustomer
+    defaults: { _controller: ServiceBundle:RegistrationCustomer:register }
+
+Employee_registration:
+    path:  /addEmployee
+    defaults: { _controller: ServiceBundle:RegistrationEmployee:register }

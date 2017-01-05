@@ -1,0 +1,44 @@
+{% extends "ServiceBundle:Manager:base_manager.html.twig" %}
+{% block page_content %}
+
+    <div class="panel-body">
+        
+        {% if orders is defined %}
+            <h4>Widzisz {{message}}</h4>
+            <h6> klikinj w zecenie żeby zobaczyć szczegóły</h6>
+            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Marka</th>
+                        <th>Model</th>
+                        <th>NrRej</th>
+                        <th>przebieg</th>
+                        <th>data rozpoczęcia</th>
+                        <th>data zakończenia</th>
+                        <th>status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders%}
+                        {% set counter = ( counter | default(0) ) + 1 %}
+                        <tr class="
+                            {% if  counter % 2 == 0%}
+                                even gradeC
+                            {% else%}
+                                odd gradeX 
+                            {%endif%}
+                            " name="click" data-href="{{ path('userShowOrder', { 'id': order.id }) }}">
+                            <td>{{order.motorcycle.make}}</td>
+                            <td>{{order.motorcycle.model}}</td>
+                            <td>{{order.motorcycle.regPlate}}</td>
+                            <td>do poprawy </td>
+                            <td>{{order.startDate.date}}</td>
+                            <td>{{order.endDate.date}}</td>
+                            <td>{{order.orderStatus}}</td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        {%endif%}         
+    </div>
+{% endblock %}

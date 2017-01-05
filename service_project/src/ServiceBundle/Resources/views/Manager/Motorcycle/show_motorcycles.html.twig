@@ -1,0 +1,45 @@
+{% extends "ServiceBundle:Manager:base_manager.html.twig" %}
+{% block page_content %}
+
+
+    {% if motorcycles is defined%}
+        <div class="panel-body">
+            <h4>Twoje Motocykle</h4>
+            <h6>kliknij w motocykl żeby zobaczyć zlecenia serwisowe</h6>
+            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Marka</th>
+                        <th>Model</th>
+                        <th>Rok produkcji </th>
+                        <th>NrRej</th>
+                        <th>przebieg</th>
+                    </tr>
+                </thead>
+                <tbody>   
+                    {% for motorcycle in motorcycles%}
+                        {% set counter = ( counter | default(0) ) + 1 %}
+
+                        <tr class="
+                            {% if  counter % 2 == 0%}
+                                even gradeC
+                            {% else%}
+                                odd gradeX 
+                            {%endif%}
+                            " name="click" data-href="{{ path('manager_show_motorcycle', { 'id': motorcycle.id }) }}">
+
+                            <td>{{motorcycle.make}}</td>
+                            <td>{{motorcycle.model}}</td>
+                            <td>{{motorcycle.year}}</td>
+                            <td>{{motorcycle.regPlate}}</td>
+                            <td>{{motorcycle.mileage}}</td>
+
+                        </tr>
+
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    {%endif%}
+
+{% endblock %}

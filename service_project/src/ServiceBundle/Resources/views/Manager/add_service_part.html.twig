@@ -1,0 +1,25 @@
+{% extends "ServiceBundle:Manager:base_manager.html.twig" %}
+{% block page_content %}
+
+    {% if parts is defined%}
+        <h2>Widzisz dodane części</h2>
+        <ol>
+            {%for part in parts%}
+                <li> nazwa: {{part.name}} cena: {{part.price}} ilość{{part.quantity}}</li>
+                {%endfor%}
+        </ol>
+    {%endif%}
+    {% if price is defined%}
+        cena wszystkich części : {{price}}
+    {%endif%}
+    {% if message is defined%}
+        <h4>{{message}}</h4>
+    {%endif%}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <form action="{{ path('order_checkout', {'orderId': orderId}) }}">
+        <button type="submit" >Przejdź do podsumowania</button>
+    </form>
+
+{% endblock %}

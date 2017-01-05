@@ -1,0 +1,25 @@
+{% extends "ServiceBundle:Manager:base_manager.html.twig" %}
+{% block page_content %}
+
+    {% if actions is defined%}
+        <h2>Widzisz dodane czynności</h2>
+        <ol>
+            {%for action in actions%}
+                <li> nazwa: {{action.name}} cena: {{action.price}}</li>
+                {%endfor%}
+        </ol>
+    {%endif%}
+    {% if price is defined%}
+        cena wszystkich czynności : {{price}}
+    {%endif%}
+    {% if message is defined%}
+        <h4>{{message}}</h4>
+    {%endif%}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <form action="{{path('add_part', {'orderId': orderId})}}">
+        <button type="submit" >Przejdź do części</button>
+    </form>
+
+{% endblock %}

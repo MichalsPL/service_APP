@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 02 Sty 2017, 17:03
+-- Czas generowania: 05 Sty 2017, 13:44
 -- Wersja serwera: 5.7.16-0ubuntu0.16.04.1
 -- Wersja PHP: 7.0.8-0ubuntu0.16.04.3
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Baza danych: `Service_test`
+-- Baza danych: `Service`
 --
 
 -- --------------------------------------------------------
@@ -53,6 +53,50 @@ CREATE TABLE `address` (
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `customer`
+--
+
+CREATE TABLE `customer` (
+  `id` int(11) NOT NULL,
+  `name` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `surname` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phoneNo` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Zrzut danych tabeli `customer`
+--
+
+INSERT INTO `customer` (`id`, `name`, `surname`, `phoneNo`) VALUES
+(6, 'user', 'user', '123456'),
+(8, 'manager', 'manager', '2'),
+(9, 'manager', 'manager', '2'),
+(10, 'test', 'test', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `employee`
+--
+
+CREATE TABLE `employee` (
+  `id` int(11) NOT NULL,
+  `name` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `surname` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phoneNo` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Zrzut danych tabeli `employee`
+--
+
+INSERT INTO `employee` (`id`, `name`, `surname`, `phoneNo`) VALUES
+(5, 'qq', 'qq', '22'),
+(7, 'employee', 'employee', '1234');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `fos_user`
 --
 
@@ -69,10 +113,19 @@ CREATE TABLE `fos_user` (
   `confirmation_token` varchar(180) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password_requested_at` datetime DEFAULT NULL,
   `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
-  `name` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `surname` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `phoneNo` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Zrzut danych tabeli `fos_user`
+--
+
+INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `type`) VALUES
+(6, 'user', 'user', 'user@user.pl', 'user@user.pl', 1, NULL, '$2y$13$qjFaVJKUaNiJe0oX7trHYO80veQ.T2UtyFNuphLma2Mk.iUWJOQs2', '2017-01-05 12:30:23', NULL, NULL, 'a:0:{}', 'customer'),
+(7, 'employee', 'employee', 'employee@employee.pl', 'employee@employee.pl', 1, NULL, '$2y$13$V58HMuH/tG0agyRHdKVhkOHZdzmm.c5raEf4DU75HLbnHz4iCEhV6', '2017-01-05 09:58:32', NULL, NULL, 'a:0:{}', 'employee'),
+(8, 'manager', 'manager', 'manager@manager.pl', 'manager@manager.pl', 1, NULL, '$2y$13$nvc1YW3JL7ZvAgAkMyJ9b.LS7eo8Q9cQlMcHly8xVqH3RseroawB2', '2017-01-05 12:30:50', NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'customer'),
+(9, 'manager2', 'manager2', 'manager2@manager.pl', 'manager2@manager.pl', 1, NULL, '$2y$13$e8CjueQ1CbyYa7mDfjj7OeUOk6kHcoIBLrt3JjiuHApKEDej/kR.K', NULL, NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'customer'),
+(10, 'test', 'test', 'test@manager.pl', 'test@manager.pl', 1, NULL, '$2y$13$Gy.8O0pnJMCqmXS2liMDDOn5IcaRuDNS00GEaBKHPV1ZWLVVeuzD2', NULL, NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'customer');
 
 -- --------------------------------------------------------
 
@@ -93,6 +146,17 @@ CREATE TABLE `motorcycle` (
   `status` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `userId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Zrzut danych tabeli `motorcycle`
+--
+
+INSERT INTO `motorcycle` (`id`, `type`, `make`, `model`, `capacity`, `regPlate`, `vin`, `year`, `mileage`, `status`, `userId`) VALUES
+(1, 'motocykl', 'Honda', 'CBF', 499, 'WB8885', 'ZCPC', 2004, 85000, 'aktywny', NULL),
+(4, 'motocykl', 'Honda', 'CBF', 499, 'WB8885A', 'ZCPC34', 2004, 85000, 'aktywny', NULL),
+(6, 'motocykl', 'Honda', 'CBF', 499, 'WB8885Aa', 'ZCPC34a', 2004, 85000, 'aktywny', NULL),
+(7, 'motocykl', 'Honda', 'CBF', 499, 'WB8885Aaa', 'ZCPC34aa', 2004, 85000, 'aktywny', NULL),
+(9, 'motocykl', 'Honda', 'CBF', 499, 'WA8885Aaaa', 'ZCPC34aaa', 2004, 85000, 'aktywny', NULL);
 
 -- --------------------------------------------------------
 
@@ -160,6 +224,18 @@ ALTER TABLE `address`
   ADD UNIQUE KEY `UNIQ_D4E6F818D93D649` (`user`);
 
 --
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `employee`
+--
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `fos_user`
 --
 ALTER TABLE `fos_user`
@@ -219,12 +295,12 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT dla tabeli `fos_user`
 --
 ALTER TABLE `fos_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT dla tabeli `motorcycle`
 --
 ALTER TABLE `motorcycle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT dla tabeli `order_status`
 --
@@ -254,13 +330,25 @@ ALTER TABLE `actions`
 -- Ograniczenia dla tabeli `address`
 --
 ALTER TABLE `address`
-  ADD CONSTRAINT `FK_D4E6F818D93D649` FOREIGN KEY (`user`) REFERENCES `fos_user` (`id`);
+  ADD CONSTRAINT `FK_D4E6F818D93D649` FOREIGN KEY (`user`) REFERENCES `customer` (`id`);
+
+--
+-- Ograniczenia dla tabeli `customer`
+--
+ALTER TABLE `customer`
+  ADD CONSTRAINT `FK_81398E09BF396750` FOREIGN KEY (`id`) REFERENCES `fos_user` (`id`) ON DELETE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `employee`
+--
+ALTER TABLE `employee`
+  ADD CONSTRAINT `FK_5D9F75A1BF396750` FOREIGN KEY (`id`) REFERENCES `fos_user` (`id`) ON DELETE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `motorcycle`
 --
 ALTER TABLE `motorcycle`
-  ADD CONSTRAINT `FK_21E380E164B64DCC` FOREIGN KEY (`userId`) REFERENCES `fos_user` (`id`);
+  ADD CONSTRAINT `FK_21E380E164B64DCC` FOREIGN KEY (`userId`) REFERENCES `customer` (`id`);
 
 --
 -- Ograniczenia dla tabeli `parts`
@@ -273,9 +361,9 @@ ALTER TABLE `parts`
 --
 ALTER TABLE `service_order`
   ADD CONSTRAINT `FK_5C5B7E7F21E380E1` FOREIGN KEY (`motorcycle`) REFERENCES `motorcycle` (`id`),
-  ADD CONSTRAINT `FK_5C5B7E7F7137DE79` FOREIGN KEY (`mechanic`) REFERENCES `fos_user` (`id`),
+  ADD CONSTRAINT `FK_5C5B7E7F7137DE79` FOREIGN KEY (`mechanic`) REFERENCES `employee` (`id`),
   ADD CONSTRAINT `FK_5C5B7E7F750AF84B` FOREIGN KEY (`orderStatus`) REFERENCES `order_status` (`id`),
-  ADD CONSTRAINT `FK_5C5B7E7FFA2425B9` FOREIGN KEY (`manager`) REFERENCES `fos_user` (`id`);
+  ADD CONSTRAINT `FK_5C5B7E7FFA2425B9` FOREIGN KEY (`manager`) REFERENCES `employee` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
