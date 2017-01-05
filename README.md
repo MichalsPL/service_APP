@@ -32,7 +32,7 @@ listę wszystkich motocykli - OK działa
 listę wszystkich zleceń - OK działa
 
 --strona motocykla 
-pozwala zobaczyć zczegóóły motocykla - nie pozwala na ich edycje
+pozwala zobaczyć zczegóły motocykla - nie pozwala na ich edycje
 wyświetla listę zleceń motocykla
 
 --strona zlecenia wyświetla :
@@ -67,7 +67,7 @@ użytkownik
  - wyświetl wszystkich 
  
 motocykl 
- - nowy
+ - nowy OK działa
  - wyświetl wszystkie
  
 zlecenia 
@@ -105,19 +105,19 @@ zlecenia
 --strona zleceń 
 wyświetla wszystkie zlecenia, powala szukać zleceń wg wybranych kryteriów
 
---strona tworzenia zlecenia - tworzy zlecenie w 6 krokach
+--strona tworzenia zlecenia - tworzy zlecenie w 6 krokach 
 
- --pozwala wybrać użytkownika z listy lub dodać nowego użytkownika(strona 1)
+ --pozwala wybrać użytkownika z listy lub dodać nowego użytkownika(strona 1) - na razie tylko wybór
  
- --pozala wybrać motocykl z listy lub dodać nowy motocykl (strona 2)
+ --pozala wybrać motocykl z listy lub dodać nowy motocykl (strona 2) na razie tylko wybór
  
- --pozwla ustalić : status zlecenia, planowaną datę rozpoczęcia i zakończeia prac, mechanika,   managera, (strona3)
+ --pozwla ustalić : status zlecenia, planowaną datę rozpoczęcia i zakończeia prac, mechanika,   managera, (strona3) OK - trzeba jeszcze ogranicznyć listę mechaników
  
- --pozwala dodać czynności serwisowe nazwa + cena ( na bieżąco wyświetla sumę kosztów), (strona 4)
+ --pozwala dodać czynności serwisowe nazwa + cena ( na bieżąco wyświetla sumę kosztów), (strona 4) - OK GOTOWE
  
- --pozwala dodać części nazwa + cena + ilość (na bierząco wyświetla sumę kosztów),(strona 5)
+ --pozwala dodać części nazwa + cena + ilość (na bierząco wyświetla sumę kosztów),(strona 5) - OK GOTOWE
  
- --wyświetla podsumowanie zlecenia (motocykl, czynności serwisowe, akcje serwisowe) pozwala przejść na stronę edycji czynności oraz części, pozwala dodać komentarz użytkownika i komentarz managera
+ --wyświetla podsumowanie zlecenia (motocykl, czynności serwisowe, akcje serwisowe) pozwala przejść na stronę edycji czynności oraz części, pozwala dodać komentarz użytkownika i komentarz managera OK - bez strony edycji 
 
 
 --strona edycji zlecenia 

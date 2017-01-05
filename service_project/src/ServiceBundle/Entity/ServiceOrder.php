@@ -445,10 +445,10 @@ class ServiceOrder
     /**
      * Add serviceActions
      *
-     * @param \ServiceBundle\Entity\Actions $serviceActions
+     * @param \ServiceBundle\Entity\Action $serviceActions
      * @return ServiceOrder
      */
-    public function addServiceAction(\ServiceBundle\Entity\Actions $serviceActions)
+    public function addServiceAction(\ServiceBundle\Entity\Action $serviceActions)
     {
         $this->serviceActions[] = $serviceActions;
 
@@ -458,9 +458,9 @@ class ServiceOrder
     /**
      * Remove serviceActions
      *
-     * @param \ServiceBundle\Entity\Actions $serviceActions
+     * @param \ServiceBundle\Entity\Action $serviceActions
      */
-    public function removeServiceAction(\ServiceBundle\Entity\Actions $serviceActions)
+    public function removeServiceAction(\ServiceBundle\Entity\Action $serviceActions)
     {
         $this->serviceActions->removeElement($serviceActions);
     }
@@ -468,10 +468,10 @@ class ServiceOrder
     /**
      * Add usedParts
      *
-     * @param \ServiceBundle\Entity\Parts $usedParts
+     * @param \ServiceBundle\Entity\Parts $usedPart
      * @return ServiceOrder
      */
-    public function addUsedPart(\ServiceBundle\Entity\Parts $usedParts)
+    public function addUsedPart(\ServiceBundle\Entity\Part $usedParts)
     {
         $this->usedParts[] = $usedParts;
 
@@ -481,9 +481,9 @@ class ServiceOrder
     /**
      * Remove usedParts
      *
-     * @param \ServiceBundle\Entity\Parts $usedParts
+     * @param \ServiceBundle\Entity\Parts $usedPart
      */
-    public function removeUsedPart(\ServiceBundle\Entity\Parts $usedParts)
+    public function removeUsedPart(\ServiceBundle\Entity\Part $usedParts)
     {
         $this->usedParts->removeElement($usedParts);
     }

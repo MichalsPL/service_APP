@@ -105,6 +105,7 @@
                 <th>czynność</th>
                 <th>cena</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -112,7 +113,8 @@
             <tr>
                 <td>{{action.name}}</td>
                 <td>{{action.price}}</td>
-                <td>Edytj</td>
+                <td>  <a href="{{ path('manager_edit_action',  { 'actionId': action.id }) }}">Edytuj</a></td>
+                <td>  <a href="{{ path('manager_delete_action',  { 'actionId': action.id }) }}">Usuń</a></td>
             </tr>
             {%endfor%}
                         <tr>
@@ -141,7 +143,8 @@
                 <td>{{part.name}}</td>
                 <td>{{part.quantity}}</td>
                 <td>{{part.price}}</td>
-                <td>Edytj</td>
+                 <td>  <a href="{{ path('manager_edit_part',  { 'partId': part.id }) }}">Edytuj</a></td>
+                <td>  <a href="{{ path('manager_delete_part',  { 'partId': part.id }) }}">Usuń</a></td>
             </tr>
             {%endfor%}
                         <tr>
