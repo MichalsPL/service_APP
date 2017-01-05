@@ -103,12 +103,15 @@
          * @Route("/addMotorcycle/{userId}")
          * @Method({"POST"})
          */
-        public function addMotorcycleAction(Request $request) {
+        public function addMotorcycleAction(Request $request, $userId) {
             $motorcycle = new Motorcycle;
             $form = $this->createMotorcycleForm($motorcycle);
             $form->handleRequest($request);
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Customer');
+            $user = $repository->findOneById($userId);
             if ($form->isValid()) {
                 $motorcycle = $form->getData();
+                $motorcycle->setUserId($user);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($motorcycle);
                 $em->flush();

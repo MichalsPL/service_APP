@@ -1,6 +1,6 @@
 APLIKAJCA DO ZARZĄDZANIA SERWISEM MOTOCYKLOWYM
 
-W FOLDERZE service_project znajduje się akyualna wersja aplikacji 
+W FOLDERZE service_project znajduje się aktualna wersja aplikacji 
 nie jest gotowa 
 
 

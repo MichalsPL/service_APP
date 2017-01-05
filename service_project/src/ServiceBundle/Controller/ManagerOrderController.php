@@ -12,7 +12,7 @@
     use ServiceBundle\Entity\ServiceOrder;
     use ServiceBundle\Entity\Action;
     use ServiceBundle\Entity\Part;
-    use ServiceBundle\Entity\User;
+    use ServiceBundle\Entity\Customer;
     use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
     use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -26,10 +26,10 @@
          * @Method({"GET"})
          */
         public function addServiceOrderUserAction() {
-            $user = new User;
+            $user = new Customer;
             $form = $this->createFormBuilder($user)
                     ->add('username', EntityType::class, array(
-                        'class' => 'ServiceBundle:User',
+                        'class' => 'ServiceBundle:Customer',
                         'label' => 'Wybierz użytkownika',
                         'attr' => array('class' => 'form-control')
                     ))->add('save', 'submit', array('label' => 'zatwierdź'))
@@ -44,10 +44,10 @@
          * @Method({"POST"})
          */
         public function ChooseServiceOrderUserAction(Request $request) {
-            $user = new User;
+            $user = new Customer;
             $form = $this->createFormBuilder($user)
                     ->add('username', 'entity', array(
-                        'class' => 'ServiceBundle:User',
+                        'class' => 'ServiceBundle:Customer',
                         'label' => 'Wybierz użytkownika',
                         'attr' => array('class' => 'form-control')
                     ))->add('save', 'submit', array('label' => 'zatwierdź'))
