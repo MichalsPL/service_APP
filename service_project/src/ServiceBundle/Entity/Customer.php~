@@ -58,6 +58,14 @@
          */
         private $motorcycles;
 
+        
+        public function __construct()
+{
+    parent::__construct();
+    
+    $this->roles = array('ROLE_USER');
+}
+
         /**
          * Get id
          *
@@ -130,5 +138,60 @@
             return $this->phoneNo;
         }
 
-    }
     
+    /**
+     * Set address
+     *
+     * @param \ServiceBundle\Entity\Address $address
+     * @return Customer
+     */
+    public function setAddress(\ServiceBundle\Entity\Address $address = null)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return \ServiceBundle\Entity\Address 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Add motorcycles
+     *
+     * @param \ServiceBundle\Entity\Motorcycle $motorcycles
+     * @return Customer
+     */
+    public function addMotorcycle(\ServiceBundle\Entity\Motorcycle $motorcycles)
+    {
+        $this->motorcycles[] = $motorcycles;
+
+        return $this;
+    }
+
+    /**
+     * Remove motorcycles
+     *
+     * @param \ServiceBundle\Entity\Motorcycle $motorcycles
+     */
+    public function removeMotorcycle(\ServiceBundle\Entity\Motorcycle $motorcycles)
+    {
+        $this->motorcycles->removeElement($motorcycles);
+    }
+
+    /**
+     * Get motorcycles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMotorcycles()
+    {
+        return $this->motorcycles;
+    }
+}

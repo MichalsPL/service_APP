@@ -117,28 +117,6 @@ class Motorcycle
         return $this->id;
     }
 
-    /**
-     * Set user
-     *
-     * @param integer $user
-     * @return Motorcycle
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return integer 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 
     /**
      * Set type

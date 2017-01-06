@@ -1,7 +1,5 @@
 <?php
 
-// src/YourCompany/YourBundle/DependencyInjection/Compiler/FOSUserOverridePass.php
-
 namespace ServiceBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
