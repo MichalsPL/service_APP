@@ -30,14 +30,6 @@
             ));
         }
 
-        /**
-         * @Route("/addUser")
-         */
-        public function addUserAction() {
-            return $this->render('ServiceBundle:Manager:add_user.html.twig', array(
-                            // ...
-            ));
-        }
 
         /**
          * @Route("/modifyUser")
@@ -47,6 +39,27 @@
                             // ...
             ));
         }
+        
+                /**
+         * @Route("/showAllCustomers", name="manager_show_all_customers")
+         */
+        public function managerShowAllCustomersAction() {
+            
+            $customers = $this->getDoctrine()->getRepository('ServiceBundle:Customer')->findAll();
+            return $this->render('ServiceBundle:Manager:customers_show_all.html.twig', array(
+                            'customers'=>$customers
+            ));
+        }
 
+                        /**
+         * @Route("/showOneCustomer/{customerId}", name="manager_show_customer")
+         */
+        public function managerShowOneCustomerAction() {
+            
+            $customers = $this->getDoctrine()->getRepository('ServiceBundle:Customer')->findAll();
+            return $this->render('ServiceBundle:Manager:customers_show_all.html.twig', array(
+                            'customers'=>$customers
+            ));
+        }
     }
     

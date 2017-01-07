@@ -5,6 +5,6 @@ parameters:
 
 services:
     app.form.registration:
-        class: ServiceBundle\Form\RegistrationType
+        class: ServiceBundle\Form\Type\RegistrationType
         tags:
             - { name: form.type, alias: service_user_registration }
