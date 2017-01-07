@@ -15,6 +15,7 @@
     use ServiceBundle\Entity\User;
     use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
     use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+    use ServiceBundle\Controller\UserController;
 
     /**
      * @Route("/manager")
@@ -30,7 +31,6 @@
             ));
         }
 
-
         /**
          * @Route("/modifyUser")
          */
@@ -39,27 +39,61 @@
                             // ...
             ));
         }
-        
-                /**
+
+        /**
          * @Route("/showAllCustomers", name="manager_show_all_customers")
          */
         public function managerShowAllCustomersAction() {
-            
+
             $customers = $this->getDoctrine()->getRepository('ServiceBundle:Customer')->findAll();
             return $this->render('ServiceBundle:Manager:customers_show_all.html.twig', array(
-                            'customers'=>$customers
+                        'customers' => $customers
             ));
         }
 
-                        /**
+        public function getUserMotorcycles($userId) {
+
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
+            $motorcycles = $repository->findByUserId($userId);
+
+            return $motorcycles;
+        }
+
+        public function getUserOrders($userId) {
+
+            $orders = [];
+            $motorcycles = $this->getUserMotorcycles($userId);
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
+            foreach ($motorcycles as $motorcycle) {
+                $motorcycleId = $motorcycle->getId();
+                $motorcycleOrders = $repository->findByMotorcycle($motorcycleId);
+                foreach ($motorcycleOrders as $order) {
+                    $orders[] = $order;
+                }
+            }
+
+            return $orders;
+        }
+
+        /**
          * @Route("/showOneCustomer/{customerId}", name="manager_show_customer")
          */
-        public function managerShowOneCustomerAction() {
-            
-            $customers = $this->getDoctrine()->getRepository('ServiceBundle:Customer')->findAll();
-            return $this->render('ServiceBundle:Manager:customers_show_all.html.twig', array(
-                            'customers'=>$customers
+        public function managerShowOneCustomerAction($customerId) {
+            $userController = new UserController;
+
+
+            $customer = $this->getDoctrine($customerId)
+                    ->getRepository('ServiceBundle:Customer')
+                    ->findOneById($customerId);
+
+            $userMotorcycles = $this->getUserMotorcycles($customerId);
+            $userOrders = $this->getUserOrders($customerId);
+            return $this->render('ServiceBundle:Manager:customers_show_one.html.twig', array(
+                        'customer' => $customer,
+                        'user_motorcycles' => $userMotorcycles,
+                        'user_orders' => $userOrders
             ));
         }
+
     }
     
