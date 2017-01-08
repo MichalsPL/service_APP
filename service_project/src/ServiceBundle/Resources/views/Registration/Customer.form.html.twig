@@ -5,25 +5,25 @@
 
 
 
-                    <form action="{{ path('Customer_registration') }}" {{ form_enctype(form) }} method="POST">
-                        <fieldset>
+    <form action="{{ path('Customer_registration') }}" {{ form_enctype(form) }} method="POST">
+        <fieldset>
 
-                            <div class="form-group">
-                                {{ form_widget(form) }}                   
+            <div class="form-group">
+                {{ form_widget(form) }}                   
 
-                                <div>
-                                    <button type="submit" >Zatwierdź</button>
-                                </div>
-                                {{ form_end(form) }}
-
-
+                <div>
+                    <button type="submit" >Zatwierdź</button>
+                </div>
+                {{ form_end(form) }}
 
 
-                            </div>
 
 
-                            <!-- Change this to a button or input when using this as a form -->
-                        </fieldset>
-                    </form>
-                
+            </div>
+
+
+            <!-- Change this to a button or input when using this as a form -->
+        </fieldset>
+    </form>
+
 {% endblock page_content %}

@@ -11,5 +11,5 @@ Customer_registration:
     defaults: { _controller: ServiceBundle:RegistrationCustomer:register }
 
 Employee_registration:
-    path:  /addEmployee
+    path:  /admin/addEmployee
     defaults: { _controller: ServiceBundle:RegistrationEmployee:register }

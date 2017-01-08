@@ -42,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Aplikacja Serwisowa Manager</a>
+                <a class="navbar-brand" href="{{ path('manager_index') }}">Aplikacja Serwisowa Manager</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -58,7 +58,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -92,10 +92,10 @@
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i>Użytkownicy<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ path('manager_show_all_customers') }}">Pokaż wszystkich</a>
+                                    <a href="{{ path('admin_show_all_employees') }}">Pokaż wszystkich</a>
                                 </li>
                                 <li>
-                                    <a href="{{ absolute_url('/manager/addCustomer') }}">Dodaj użytkownika</a>
+                                    <a href="{{ absolute_url('/admin/addEmployee') }}">Dodaj użytkownika</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

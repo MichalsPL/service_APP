@@ -3,10 +3,8 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
    
-    {% endif %}
+  
     
-    {{dump(targetUrl)}}
+    {{dump(user)}}
 {% endblock fos_user_content %}

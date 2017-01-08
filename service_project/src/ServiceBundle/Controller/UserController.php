@@ -5,7 +5,10 @@
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
     use ServiceBundle\Entity\User;
- /**
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+    use Symfony\Component\HttpFoundation\Request;
+
+    /**
      * @Route("/user")
      */
     class UserController extends Controller {
@@ -48,7 +51,7 @@
         }
 
         /**
-         * @Route("/", name="userIndex")
+         * @Route("/", name="user_index")
          */
         public function indexAction() {
 
@@ -84,37 +87,102 @@
         }
 
         /**
-         * @Route("/showOrder/{id}", name="userShowOrder")
+         * @Route("/showOrder/{orderId}", name="userShowOrder")
          */
-        public function showOrderAction($id) {
+        public function showOrderAction($orderId) {
             $userId = $this->container->get('security.context')->getToken()->getUser()->getId();
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
-            $order = $repository->findOneById($id);
+            $order = $repository->findOneById($orderId);
+
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
+            $serviceOrder = $repository->findOneById($orderId);
+
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Action');
+            $serviceActions = $repository->findByServiceOrder($orderId);
+
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Part');
+            $serviceParts = $repository->findByServiceOrder($orderId);
 
             if ($order->getMotorcycle()->getUserId()->getId() == $userId) {
 
                 return $this->render('ServiceBundle:User:show_order.html.twig', array(
-                            'order' => $order
+                            'order' => $serviceOrder,
+                            'actions' => $serviceActions,
+                            'parts' => $serviceParts
                 ));
             } else {
                 return $this->redirectToRoute('userIndex', array());
             }
-            return $this->render('ServiceBundle:User:show_action.html.twig', array(
-                            // ...
-            ));
+        }
+
+        public function editUserForm($user) {
+            $form = $this->createFormBuilder($user)
+                    ->setMethod('POST')
+                    ->add('name')
+                    ->add('surname')
+                    ->add('email')
+                    ->add('password', null, array(
+                        'data' => '',
+                        'required' => false
+                    ))
+                    ->add('save', 'submit', array('label' => 'zatwierdź'))
+                    ->getForm();
+            return $form;
         }
 
         /**
          * @Route("/changeUserDetails", name="userChangeUserDetails")
+         * @Method({"GET"})
          */
-        public function changeUserDetailsAction() {
+        public function changeUserDetailsFormAction() {
             $user = $this->getUser();
-            $form = createForm($user);
-            $userManager = $container->get('fos_user.user_manager');
+
+            $form = $this->editUserForm($user);
+
             return $this->render('ServiceBundle:User:change_user_details.html.twig', array(
                         'form' => $form->createView(),
-                        'user' => $user
+                        'message' => "wpisz nowe dane jeśli nie chcesz zmieniać hasła zostaw puste pole"
             ));
+        }
+
+        /**
+         * @Route("/changeUserDetails")
+         * @Method({"POST"})
+         */
+        public function changeUserDetailsAction(Request $request) {
+            $user = $this->getUser();
+
+            $form = $this->createFormBuilder($user)
+                    ->add('name')
+                    ->add('surname')
+                    ->add('email')
+                    ->add('password', null, array(
+                        'data' => '',
+                        'required' => false
+                    ))
+                    ->add('save', 'submit', array('label' => 'zatwierdź'))
+                    ->getForm();
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $userManager = $this->container->get('fos_user.user_manager');
+
+                $editedUser = $user;
+                $editedUser = $form->getData();
+                if ($editedUser->getPlainPassword() == "") {
+                    $editedUser->setPassword($user->getPassword());
+                }
+                $user->setPlainPassword('test');
+                $user->setEnabled(true);
+                $userManager->updateUser($user, true);
+
+
+                return $this->render('ServiceBundle:User:change_user_details.html.twig', array(
+                            'message' => 'zmieniłeś swoje dane ',
+                            'home' => 'wróć'
+                ));
+            } else {
+                
+            }
         }
 
     }

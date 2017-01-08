@@ -1,16 +1,19 @@
 {% extends "ServiceBundle:User:base_user.html.twig" %}
 {% block page_content %}
 
-    {{dump(user)}}
     <div class="panel-body">
-        <div class="row">
-            <div class="col-lg-6">
-                <form role="form">
-                    <div class="form-group">
-                  {{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
-                </form>
-            </div>
+        {{message}}
+        {%if home is defined%}
+            <a  href="{{ path('user_index') }}">Wróć na stronę Główną</a>
+        {%endif%}
 
-        {% endblock %}
+        <div class="form-group">
+            {%if form is defined%}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            {%endif%}
+
+        </div>
+
+    {% endblock %}
