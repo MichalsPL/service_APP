@@ -85,6 +85,7 @@
                     ->findOneById($customerId);
 
             $userMotorcycles = $this->getUserMotorcycles($customerId);
+            
             $userOrders = $this->getUserOrders($customerId);
             return $this->render('ServiceBundle:Manager:customers_show_one.html.twig', array(
                         'customer' => $customer,

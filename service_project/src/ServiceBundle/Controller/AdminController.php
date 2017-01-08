@@ -16,10 +16,9 @@
          * @Route("/", name="admin_index")
          */
         public function adminIndexAction() {
-            
-             
+
+
             return $this->render('ServiceBundle:Admin:index.html.twig', array(
-                            
             ));
         }
 
@@ -60,39 +59,37 @@
          * @Route("/showOneEmployee/{employeeId}", name="admin_show_employee")
          */
         public function adminShowOneEmployeeAction($employeeId) {
-  
+
             $employee = $this->getDoctrine()
                     ->getRepository('ServiceBundle:Employee')
                     ->findOneById($employeeId);
 
             return $this->render('ServiceBundle:Admin:employees_show_one.html.twig', array(
                         'employee' => $employee
-                        
             ));
         }
-        
-                /**
+
+        /**
          * @Route("/changeStatus/{employeeId}", name="admin_change_status")
          */
         public function adminChangeStatusEmployeeAction($employeeId) {
-  
+
             $employee = $this->getDoctrine()
                     ->getRepository('ServiceBundle:Employee')
                     ->findOneById($employeeId);
             $userManager = $this->container->get('fos_user.user_manager');
-if ($employee->isEnabled()==true){
-    $employee->setEnabled(false);
+            if ($employee->isEnabled() == true) {
+                $employee->setEnabled(false);
                 $userManager->updateUser($employee, true);
-}else{
-     $employee->setEnabled(true);
+            } else {
+                $employee->setEnabled(true);
                 $userManager->updateUser($employee, true);
-}
-            
-             return $this->redirectToRoute('admin_show_employee', array('employeeId' => $employeeId));
-        
+            }
+
+            return $this->redirectToRoute('admin_show_employee', array('employeeId' => $employeeId));
         }
-        
-           public function editEmployeeForm($employee) {
+
+        public function editEmployeeForm($employee) {
             $form = $this->createFormBuilder($employee)
                     ->setMethod('POST')
                     ->add('name')
@@ -112,7 +109,7 @@ if ($employee->isEnabled()==true){
          * @Method({"GET"})
          */
         public function changeEmployeeDetailsFormAction($employeeId) {
-                $employee = $this->getDoctrine()
+            $employee = $this->getDoctrine()
                     ->getRepository('ServiceBundle:Employee')
                     ->findOneById($employeeId);
 
@@ -128,8 +125,8 @@ if ($employee->isEnabled()==true){
          * @Route("/changeEmployee/{employeeId}")
          * @Method({"POST"})
          */
-        public function changeUserDetailsAction(Request $request,$employeeId ) {
-              $employee = $this->getDoctrine()
+        public function changeUserDetailsAction(Request $request, $employeeId) {
+            $employee = $this->getDoctrine()
                     ->getRepository('ServiceBundle:Employee')
                     ->findOneById($employeeId);
 
@@ -143,7 +140,7 @@ if ($employee->isEnabled()==true){
                 if ($editedEmployee->getPlainPassword() == "") {
                     $editedEmployee->setPlainPassword($employee->getPlainPassword());
                 }
-            
+
                 $userManager->updateUser($editedEmployee, true);
 
 
@@ -155,7 +152,6 @@ if ($employee->isEnabled()==true){
                 
             }
         }
-
 
     }
     
