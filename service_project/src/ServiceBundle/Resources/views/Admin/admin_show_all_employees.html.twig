@@ -26,7 +26,7 @@
                             {% else%}
                                 odd gradeX 
                             {%endif%}
-                            "{# name="click" data-href="{{ path('manager_show_customer', { 'customerId': customer.id }) }}"#}>
+                            " name="click" data-href="{{ path('admin_show_employee', { 'employeeId': admin.id }) }}">
                             <td>{{admin.name}}</td>
                             <td>{{admin.surname}}</td>
                             <td>{{admin.phoneNo}}</td>
@@ -51,7 +51,6 @@
                         <th>Nazwisko</th>
                         <th>Numer Telefonu</th>
                         <th>Email</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -63,7 +62,7 @@
                             {% else%}
                                 odd gradeX 
                             {%endif%}
-                            "{# name="click" data-href="{{ path('manager_show_customer', { 'customerId': customer.id }) }}"#}>
+                            " name="click" data-href="{{ path('admin_show_employee', { 'employeeId': manager.id }) }}">
                             <td>{{manager.name}}</td>
                             <td>{{manager.surname}}</td>
                             <td>{{manager.phoneNo}}</td>
@@ -100,7 +99,7 @@
                             {% else%}
                                 odd gradeX 
                             {%endif%}
-                            "{# name="click" data-href="{{ path('manager_show_customer', { 'customerId': customer.id }) }}"#}>
+                            " name="click" data-href="{{ path('admin_show_employee', { 'employeeId': mechanic.id }) }}">
                             <td>{{mechanic.name}}</td>
                             <td>{{mechanic.surname}}</td>
                             <td>{{mechanic.phoneNo}}</td>

@@ -79,8 +79,6 @@
          * @Route("/showOneCustomer/{customerId}", name="manager_show_customer")
          */
         public function managerShowOneCustomerAction($customerId) {
-            $userController = new UserController;
-
 
             $customer = $this->getDoctrine($customerId)
                     ->getRepository('ServiceBundle:Customer')

@@ -1,0 +1,26 @@
+{% extends "ServiceBundle:Admin:base_admin.html.twig" %}
+{% block page_content %}
+
+    <div class="panel-body">
+        <h4>Widzisz Pracownika</h4>
+        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+            <thead>
+                <tr>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Numer Telefonu</th>
+                    <th>Email</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="even gradeC" >
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.surname}}</td>
+                    <td>{{employee.phoneNo}}</td>
+                    <td>{{employee.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
