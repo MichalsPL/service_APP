@@ -1,0 +1,19 @@
+{% extends "ServiceBundle:Admin:base_admin.html.twig" %}
+{% block page_content %}
+
+    <div class="panel-body">
+        {{message}}
+        {%if home is defined%}
+            <a  href="{{ path('admin_index') }}">Wróć na stronę Główną</a>
+        {%endif%}
+
+        <div class="form-group">
+            {%if form is defined%}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            {%endif%}
+
+        </div>
+
+    {% endblock %}

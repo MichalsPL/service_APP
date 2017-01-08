@@ -169,10 +169,8 @@
                 $editedUser = $user;
                 $editedUser = $form->getData();
                 if ($editedUser->getPlainPassword() == "") {
-                    $editedUser->setPassword($user->getPassword());
+                    $editedUser->setPlainPassword($user->getPlainPassword());
                 }
-                $user->setPlainPassword('test');
-                $user->setEnabled(true);
                 $userManager->updateUser($user, true);
 
 

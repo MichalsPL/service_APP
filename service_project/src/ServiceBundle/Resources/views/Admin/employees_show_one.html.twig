@@ -1,5 +1,6 @@
 {% extends "ServiceBundle:Admin:base_admin.html.twig" %}
 {% block page_content %}
+ 
 
     <div class="panel-body">
         <h4>Widzisz Pracownika</h4>
@@ -22,5 +23,15 @@
                 </tr>
             </tbody>
         </table>
+        {% if employee.enabled == true%}
+           
+            <a  href="{{ path('admin_change_status', {'employeeId': employee.id}) }}">dezaktyuwj użytkownika</a>
+        {%else%}
+            
+            <a  href="{{ path('admin_change_status', {'employeeId': employee.id}) }}">aktywuj użytkownika</a>
+        {%endif%}
+        
+          <a  href="{{ path('admin_change_employee', {'employeeId': employee.id}) }}">edytuj uzytkownika</a>
+ 
     </div>
 {% endblock %}
