@@ -1,0 +1,43 @@
+{% extends "ServiceBundle:Admin:base_admin.html.twig" %}
+{% block page_content %}
+
+  {{dump(user)}}
+
+ 
+  {%if message is defined%}
+        <h4>{{message}}</h4>
+    {%endif%}
+
+    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+        <thead>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{user.name}}</td>
+                <td>{{user.surname}}</td>
+            </tr>
+        </tbody>
+    </table>
+        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+        <thead>
+            <tr>
+                <th>email</th>
+                <th>telefon</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{user.email}}</td>
+                <td>{{user.phoneNo}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('manager_modify_motorcycle', {'motorcycleId': user.id}) }}">Edytuj</a>
+    <a href="{{ path('manager_add_service_order', {'motorcycleId': user.id}) }}">Dodaj zlecenie</a>
+
+{% endblock %}

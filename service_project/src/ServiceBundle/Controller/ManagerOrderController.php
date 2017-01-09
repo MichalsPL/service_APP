@@ -141,11 +141,39 @@
             return $choices;
         }
 
+        public function chooseMechanic() {
+            $em = $this->getDoctrine()->getManager();
+            $query = $em->createQuery(
+                    "SELECT e FROM \ServiceBundle\Entity\Employee e WHERE e.roles"
+                    . " LIKE '%ROLE_MECHANIC%' AND e.enabled = 1 ");
+            $mechanics = $query->getResult();
+
+            return $mechanics;
+        }
+        
+           public function chooseManager() {
+            $em = $this->getDoctrine()->getManager();
+            $query = $em->createQuery(
+                    "SELECT e FROM \ServiceBundle\Entity\Employee e WHERE e.roles"
+                    . " LIKE '%ROLE_MANAGER%' AND e.enabled = 1 ");
+            $managers = $query->getResult();
+
+            return $managers;
+        }
+
         public function createServiceOrderForm($serviceOrder) {
             $form = $this->createFormBuilder($serviceOrder)
                     ->add('mileage', null, array('attr' => array('class' => 'form-control')))
-                    ->add('manager', null, array('attr' => array('class' => 'form-control')))
-                    ->add('mechanic', null, array('attr' => array('class' => 'form-control')))
+                    ->add('manager', ChoiceType::class, array('choices_as_values' => true,
+                        'choice_label' => 'name',
+                        'label' => 'Wybierz Managera',
+                        'choices' => $this->chooseManager(),
+                        'attr' => array('class' => 'form-control')))
+                    ->add('mechanic', ChoiceType::class, array('choices_as_values' => true,
+                        'choice_label' => 'name',
+                        'label' => 'Wybierz Mechanika',
+                        'choices' => $this->chooseMechanic(),
+                        'attr' => array('class' => 'form-control')))
                     ->add('startDate', DateTimeType::class, array(
                         'placeholder' => array(
                             'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
@@ -260,221 +288,6 @@
             ));
         }
 
-        public function createActionForm($action) {
-
-            $form = $this->createFormBuilder($action)
-                    ->add('name', null, array('attr' => array('class' => 'form-control')))
-                    ->add('price', null, array('attr' => array('class' => 'form-control')))
-                    ->add('save', 'submit', array('label' => 'zatwierdź'))
-                    ->getForm();
-            return $form;
-        }
-
-        public function TotalActionPrice($actions) {
-            $price = 0;
-            foreach ($actions as $action) {
-                $price += $action->getPrice();
-            }
-            return $price;
-        }
-
-        /**
-         * @Route("/addServiceAction/{orderId}", name="manager_add_action")
-         * @Method({"GET"})
-         * 
-         */
-        public function addServiceActionFormAction($orderId) {
-            $serviceAction = new Action;
-            $form = $this->createActionForm($serviceAction);
-
-            return $this->render('ServiceBundle:Manager:add_service_action.html.twig', array(
-                        'form' => $form->createView(),
-                        'orderId' => $orderId
-            ));
-        }
-
-        /**
-         * @Route("/addServiceAction/{orderId}", name="add_next_action")
-         * @Method({"POST"})
-         * 
-         */
-        public function addServiceActionAction(Request $request, $orderId) {
-
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
-            $serviceOrder = $repository->findOneById($orderId);
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Action');
-            $actions = $repository->findByServiceOrder($serviceOrder);
-
-            $serviceAction = new Action;
-            $form = $this->createActionForm($serviceAction);
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $serviceAction = $form->getData();
-                $serviceAction->setServiceOrder($serviceOrder);
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($serviceAction);
-                $em->flush();
-                $actions[] = $serviceAction;
-                $price = $this->TotalActionPrice($actions);
-                $serviceAction = new Action;
-                $form = $this->createActionForm($serviceAction, $orderId);
-
-                $message = "Dodałeś nową czynność";
-            } else {
-
-                $message = "Czynność nie została dodana";
-            }
-
-            return $this->render('ServiceBundle:Manager:add_service_action.html.twig', array(
-                        'form' => $form->createView(),
-                        'message' => $message,
-                        'orderId' => $orderId,
-                        'actions' => $actions,
-                        'price' => $price
-            ));
-        }
-
-        /**
-         * @Route("/editServiceAction/{actionId}", name="manager_edit_action")
-         * @Method({"GET"})
-         * 
-         */
-        public function editServiceActionFormAction($actionId) {
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Action');
-            $serviceAction = $repository->findOneById($actionId);
-            $form = $this->createActionForm($serviceAction);
-            $actionId = $serviceAction->getServiceOrder()->getId();
-
-            return $this->render('ServiceBundle:Manager:add_service_action.html.twig', array(
-                        'form' => $form->createView(),
-                        'actionId' => $actionId,
-                        'orderId' => $orderId
-            ));
-        }
-
-        /**
-         * @Route("/editServiceAction/{actionId}")
-         * @Method({"POST"})
-         * 
-         */
-        public function editServiceActionAction(Request $request, $actionId) {
-
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Action');
-            $serviceAction = $repository->findOneById($actionId);
-
-            $form = $this->createActionForm($serviceAction);
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $serviceAction = $form->getData();
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($serviceAction);
-                $em->flush();
-
-
-                $message = "Dodałeś nową czynność";
-            } else {
-
-                $message = "Czynność nie została dodana";
-            }
-            return $this->redirectToRoute('order_checkout', array(
-                        'orderId' => $serviceAction->getServiceOrder()->getId()
-            ));
-        }
-
-        /**
-         * @Route("/deleteServiceAction/{actionId}", name="manager_delete_action")
-         * @Method({"GET"})
-         * 
-         */
-        public function deleteServiceActionAction($actionId) {
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Action');
-            $serviceAction = $repository->findOneById($actionId);
-            $em = $this->getDoctrine()->getManager();
-            $deleted = $serviceAction;
-            $em->remove($serviceAction);
-            $em->flush();
-
-            return $this->redirectToRoute('order_checkout', array(
-                        'orderId' => $deleted->getServiceOrder()->getId()
-            ));
-        }
-
-        public function createPartForm($action) {
-
-            $form = $this->createFormBuilder($action)
-                    ->add('name', null, array('attr' => array('class' => 'form-control'),
-                        'label' => 'Podaj nazwę części'))
-                    ->add('quantity', null, array('attr' => array('class' => 'form-control'),
-                        'label' => 'podaj ilość użytą do naprawy'))
-                    ->add('price', null, array('attr' => array('class' => 'form-control'),
-                        'label' => 'Podaj cenę za wszystkie jednostki'))
-                    ->add('save', 'submit', array('label' => 'zatwierdź'))
-                    ->getForm();
-            return $form;
-        }
-
-        public function TotalPartsPrice($parts) {
-            $price = 0;
-            foreach ($parts as $part) {
-                $price += $part->getPrice();
-            }
-            return $price;
-        }
-
-        /**
-         * @Route("/addPart/{orderId}", name="add_part")
-         * @Method({"GET"})
-         * 
-         */
-        public function addPartFormAction($orderId) {
-            $part = new Part;
-            $form = $this->createPartForm($part);
-
-            return $this->render('ServiceBundle:Manager:add_service_part.html.twig', array(
-                        'form' => $form->createView(),
-                        'orderId' => $orderId,
-            ));
-        }
-
-        /**
-         * @Route("/addPart/{orderId}", name="add_next_part")
-         * @Method({"POST"})
-         * 
-         */
-        public function addPartAction(Request $request, $orderId) {
-
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
-            $serviceOrder = $repository->findOneById($orderId);
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Part');
-            $parts = $repository->findByServiceOrder($serviceOrder);
-
-            $part = new Part;
-            $form = $this->createPartForm($part);
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $part = $form->getData();
-                $part->setServiceOrder($serviceOrder);
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($part);
-                $em->flush();
-                $parts[] = $part;
-                $price = $this->TotalPartsPrice($parts);
-                $part = new Part;
-                $form = $this->createPartForm($part);
-                $message = "dodałeś nowe zlecenie";
-            } else {
-
-                $message = "zlecenie  nie zostało dodane";
-            }
-
-            return $this->render('ServiceBundle:Manager:add_service_part.html.twig', array(
-                        'form' => $form->createView(),
-                        'message' => $message,
-                        'orderId' => $orderId,
-                        'parts' => $parts,
-                        'price' => $price
-            ));
-        }
 
         public function getActionTotal($actions) {
             $sum = 0;
@@ -658,7 +471,7 @@
             $em = $this->getDoctrine()->getManager();
             $query = $em->createQuery('SELECT s FROM ServiceBundle:ServiceOrder s WHERE s.orderStatus = ' . $statusId . 'ORDER BY s.id');
             $allOrders = $query->getResult();
-             $orders = [];
+            $orders = [];
             foreach ($allOrders as $order) {
                 $orderName = $order->getOrderStatus()->getName();
                 $order->setOrderStatus($orderName);
@@ -670,8 +483,8 @@
                         'message' => "Widzisz zlecenia o wybranym statusie"
             ));
         }
-        
-         /**
+
+        /**
          * @Route("/showOneOrder/{orderId}", name="manager_show_one_order")
          * @Method({"GET"})
          * 

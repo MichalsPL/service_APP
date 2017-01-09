@@ -128,9 +128,14 @@ class ServiceOrder
      */
     private $orderStatus;
 
+
     function __construct() {
          $this->serviceActions = new ArrayCollection();
         $this->usedParts = new ArrayCollection();
+        $this->dateOfAcceptance = new \DateTime();
+        $this->startDate = new \DateTime();
+        $this->endDate = new \DateTime();
+        $this->dateOfRelase = new \DateTime();
     }
 
     /**
