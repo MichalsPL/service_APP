@@ -1,0 +1,23 @@
+{% extends "ServiceBundle:Manager:base_manager.html.twig" %}
+{% block page_content %}
+
+    <div class="panel-body">
+        {{message}}
+        {%if home is defined%}
+            <a  href="{{ path('manager_index') }}">Wróć na stronę Główną</a>
+        {%endif%}
+
+        <div class="form-group">
+            {%if form is defined%}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            {%endif%}
+            
+               {%if customer is defined%}
+               {{dump(customer)}}
+            {%endif%}
+           
+        </div>
+
+    {% endblock %}

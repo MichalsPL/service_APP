@@ -117,10 +117,14 @@
 
         public function editUserForm($user) {
             $form = $this->createFormBuilder($user)
-                    ->setMethod('POST')
                     ->add('name')
                     ->add('surname')
                     ->add('email')
+                    ->add('postalCode')
+                    ->add('city')
+                    ->add('street')
+                    ->add('houseNo')
+                    ->add('aptNo')
                     ->add('password', null, array(
                         'data' => '',
                         'required' => false
