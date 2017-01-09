@@ -47,16 +47,47 @@
          */
         private $phoneNo;
 
-        /**
-         * @ORM\OneToOne(targetEntity="Address", mappedBy="user")
-         */
-        private $address;
 
         /**
          * 
          * @ORM\OneToMany(targetEntity="Motorcycle", mappedBy="userId")
          */
         private $motorcycles;
+
+         /**
+         * @var string
+         *
+         * @ORM\Column(name="postalCode", type="string", length=6, nullable=true)
+         */
+        private $postalCode;
+
+        /**
+         * @var string
+         *
+         * @ORM\Column(name="street", type="string", length=30, nullable=true)
+         */
+        private $street;
+
+        /**
+         * @var string
+         *
+         * @ORM\Column(name="city", type="string", length=30, nullable=true)
+         */
+        private $city;
+
+        /**
+         * @var string
+         *
+         * @ORM\Column(name="houseNo", type="string", length=10, nullable=true)
+         */
+        private $houseNo;
+
+        /**
+         * @var string
+         *
+         * @ORM\Column(name="aptNo", type="string", length=10, nullable=true)
+         */
+        private $aptNo;
 
         
         public function __construct()
@@ -193,5 +224,120 @@
     public function getMotorcycles()
     {
         return $this->motorcycles;
+    }
+
+    /**
+     * Set postalCode
+     *
+     * @param string $postalCode
+     * @return Customer
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * Get postalCode
+     *
+     * @return string 
+     */
+    public function getPostalCode()
+    {
+        return $this->postalCode;
+    }
+
+    /**
+     * Set street
+     *
+     * @param string $street
+     * @return Customer
+     */
+    public function setStreet($street)
+    {
+        $this->street = $street;
+
+        return $this;
+    }
+
+    /**
+     * Get street
+     *
+     * @return string 
+     */
+    public function getStreet()
+    {
+        return $this->street;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return Customer
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set houseNo
+     *
+     * @param string $houseNo
+     * @return Customer
+     */
+    public function setHouseNo($houseNo)
+    {
+        $this->houseNo = $houseNo;
+
+        return $this;
+    }
+
+    /**
+     * Get houseNo
+     *
+     * @return string 
+     */
+    public function getHouseNo()
+    {
+        return $this->houseNo;
+    }
+
+    /**
+     * Set aptNo
+     *
+     * @param string $aptNo
+     * @return Customer
+     */
+    public function setAptNo($aptNo)
+    {
+        $this->aptNo = $aptNo;
+
+        return $this;
+    }
+
+    /**
+     * Get aptNo
+     *
+     * @return string 
+     */
+    public function getAptNo()
+    {
+        return $this->aptNo;
     }
 }

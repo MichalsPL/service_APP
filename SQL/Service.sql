@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 05 Sty 2017, 13:44
+-- Czas generowania: 09 Sty 2017, 10:05
 -- Wersja serwera: 5.7.16-0ubuntu0.16.04.1
 -- Wersja PHP: 7.0.8-0ubuntu0.16.04.3
 
@@ -34,21 +34,12 @@ CREATE TABLE `actions` (
   `serviceOrder` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `address`
+-- Zrzut danych tabeli `actions`
 --
 
-CREATE TABLE `address` (
-  `id` int(11) NOT NULL,
-  `user` int(11) DEFAULT NULL,
-  `postalCode` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `street` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `city` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `houseNo` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `aptNo` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+INSERT INTO `actions` (`id`, `name`, `price`, `done`, `serviceOrder`) VALUES
+(2, 'bbb', 18.78, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -60,18 +51,28 @@ CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
   `name` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `surname` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `phoneNo` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL
+  `phoneNo` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `postalCode` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `street` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `city` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `houseNo` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `aptNo` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Zrzut danych tabeli `customer`
 --
 
-INSERT INTO `customer` (`id`, `name`, `surname`, `phoneNo`) VALUES
-(6, 'user', 'user', '123456'),
-(8, 'manager', 'manager', '2'),
-(9, 'manager', 'manager', '2'),
-(10, 'test', 'test', '2');
+INSERT INTO `customer` (`id`, `name`, `surname`, `phoneNo`, `postalCode`, `street`, `city`, `houseNo`, `aptNo`) VALUES
+(6, 'user', 'user', '123456', NULL, NULL, NULL, NULL, NULL),
+(8, 'manager', 'manager', '2', NULL, NULL, NULL, NULL, NULL),
+(9, 'manager', 'manager', '2', NULL, NULL, NULL, NULL, NULL),
+(10, 'test', 'test', '2', NULL, NULL, NULL, NULL, NULL),
+(11, 'user2', 'user2', '2', NULL, NULL, NULL, NULL, NULL),
+(12, 'test2', 'test2', 'test', NULL, NULL, NULL, NULL, NULL),
+(13, 'test2', 'test2', 'test', NULL, NULL, NULL, NULL, NULL),
+(14, 'test2', 'test2', 'test', NULL, NULL, NULL, NULL, NULL),
+(15, 'test5', 'test5', '22', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -92,7 +93,11 @@ CREATE TABLE `employee` (
 
 INSERT INTO `employee` (`id`, `name`, `surname`, `phoneNo`) VALUES
 (5, 'qq', 'qq', '22'),
-(7, 'employee', 'employee', '1234');
+(7, 'employee', 'employee', '1234'),
+(16, 'admin', 'admin', 'admin'),
+(17, 'mechanic2', 'mechanic2', '2'),
+(18, 'manager5', 'manager5', 'manager5'),
+(19, 'mechanic4', 'mechanic4', '44');
 
 -- --------------------------------------------------------
 
@@ -121,11 +126,20 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `type`) VALUES
-(6, 'user', 'user', 'user@user.pl', 'user@user.pl', 1, NULL, '$2y$13$qjFaVJKUaNiJe0oX7trHYO80veQ.T2UtyFNuphLma2Mk.iUWJOQs2', '2017-01-05 12:30:23', NULL, NULL, 'a:0:{}', 'customer'),
+(6, 'user', 'user', 'user@user.pl', 'user@user.pl', 1, NULL, '$2y$13$Kc1YBhXzyH/bLWnVCdv/ueJJfDQ3pfbPe5ww2f8WYR/dXIs7x8irK', '2017-01-08 09:13:21', NULL, NULL, 'a:0:{}', 'customer'),
 (7, 'employee', 'employee', 'employee@employee.pl', 'employee@employee.pl', 1, NULL, '$2y$13$V58HMuH/tG0agyRHdKVhkOHZdzmm.c5raEf4DU75HLbnHz4iCEhV6', '2017-01-05 09:58:32', NULL, NULL, 'a:0:{}', 'employee'),
-(8, 'manager', 'manager', 'manager@manager.pl', 'manager@manager.pl', 1, NULL, '$2y$13$nvc1YW3JL7ZvAgAkMyJ9b.LS7eo8Q9cQlMcHly8xVqH3RseroawB2', '2017-01-05 12:30:50', NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'customer'),
+(8, 'manager', 'manager', 'manager@manager.pl', 'manager@manager.pl', 1, NULL, '$2y$13$nvc1YW3JL7ZvAgAkMyJ9b.LS7eo8Q9cQlMcHly8xVqH3RseroawB2', '2017-01-07 10:03:41', NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'customer'),
 (9, 'manager2', 'manager2', 'manager2@manager.pl', 'manager2@manager.pl', 1, NULL, '$2y$13$e8CjueQ1CbyYa7mDfjj7OeUOk6kHcoIBLrt3JjiuHApKEDej/kR.K', NULL, NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'customer'),
-(10, 'test', 'test', 'test@manager.pl', 'test@manager.pl', 1, NULL, '$2y$13$Gy.8O0pnJMCqmXS2liMDDOn5IcaRuDNS00GEaBKHPV1ZWLVVeuzD2', NULL, NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'customer');
+(10, 'test', 'test', 'test@manager.pl', 'test@manager.pl', 1, NULL, '$2y$13$Gy.8O0pnJMCqmXS2liMDDOn5IcaRuDNS00GEaBKHPV1ZWLVVeuzD2', NULL, NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'customer'),
+(11, 'user2', 'user2', 'user2@user.pl', 'user2@user.pl', 1, NULL, '$2y$13$vDIeXWMaMwG50hle89neAO48bo7u5/nmXUDPPfy1n68amWWW6eWDy', NULL, NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'customer'),
+(12, 'test2', 'test2', 'test@user.pl2', 'test@user.pl2', 1, NULL, '$2y$13$hFtlYKJOVm2Bb7HCCvv0l.eH2073HGpSDh/BesBB1zmRk9v/Gmdi.', NULL, NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'customer'),
+(13, 'test3', 'test3', 'test3@user.pl3', 'test3@user.pl3', 1, NULL, '$2y$13$xToDX7yxyHcjf6pnSynW5OVaDYyd.rk3iSIztDev5//TT6C9Sewb2', NULL, NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'customer'),
+(14, 'test4', 'test4', 'test4@user.pl3', 'test4@user.pl3', 1, NULL, '$2y$13$pAfE/YEKIMCwnk7WscDadu2misxJVrfAk3hcLy0p17XWKnEqH8bE6', NULL, NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'customer'),
+(15, 'test5', 'test5', 'test5@user.pl', 'test5@user.pl', 1, NULL, '$2y$13$LyQVlB9.uJFCOy57yf4InuGFJpI26SiqN.0Sly5Ul4meTCQIoJOgC', NULL, NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'customer'),
+(16, 'admin', 'admin', 'admin@admin.pl', 'admin@admin.pl', 1, NULL, '$2y$13$kw/1FO.uSfTPeirsmeRghudgZQbRQgTRzOVDuX9EnUUGFeJ8gicA.', '2017-01-09 08:50:16', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}', 'employee'),
+(17, 'mechanic2', 'mechanic2', 'mechanic2@mechanic.pl', 'mechanic2@mechanic.pl', 1, NULL, '$2y$13$sPuVCC11F/ujo6c4.qxPdODjewABz7.R7PFRomnQwXO89UvjifEbW', NULL, NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_MECHANIC\";}', 'employee'),
+(18, 'manager5', 'manager5', 'manager5@manager5.pl', 'manager5@manager5.pl', 1, NULL, '$2y$13$RvofkeardPnFM5x6YR7hB.SP7bxAH0s0I9wuTXpbqzRGB9A4cwg0S', NULL, NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'employee'),
+(19, 'mechanic4', 'mechanic4', 'mechanic4@mechanic.pl', 'mechanic4@mechanic.pl', 1, NULL, '$2y$13$jvy55GTQANuibq/53sEL2uDGf8zbGBEDbwkxBTm2Dh3sRe5fArDwm', NULL, NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_MECHANIC\";}', 'employee');
 
 -- --------------------------------------------------------
 
@@ -152,11 +166,12 @@ CREATE TABLE `motorcycle` (
 --
 
 INSERT INTO `motorcycle` (`id`, `type`, `make`, `model`, `capacity`, `regPlate`, `vin`, `year`, `mileage`, `status`, `userId`) VALUES
-(1, 'motocykl', 'Honda', 'CBF', 499, 'WB8885', 'ZCPC', 2004, 85000, 'aktywny', NULL),
-(4, 'motocykl', 'Honda', 'CBF', 499, 'WB8885A', 'ZCPC34', 2004, 85000, 'aktywny', NULL),
-(6, 'motocykl', 'Honda', 'CBF', 499, 'WB8885Aa', 'ZCPC34a', 2004, 85000, 'aktywny', NULL),
-(7, 'motocykl', 'Honda', 'CBF', 499, 'WB8885Aaa', 'ZCPC34aa', 2004, 85000, 'aktywny', NULL),
-(9, 'motocykl', 'Honda', 'CBF', 499, 'WA8885Aaaa', 'ZCPC34aaa', 2004, 85000, 'aktywny', NULL);
+(1, 'motocykl', 'Honda', 'CBF', 499, 'WB8885', 'ZCPCZ', 2004, 85000, 'aktywny', 6),
+(4, 'motocykl', 'Honda', 'CBF', 499, 'WB8885A', 'ZCPC34', 2004, 85000, 'aktywny', 6),
+(6, 'motocykl', 'Honda', 'CBF', 499, 'WB8885Aa', 'ZCPC34a', 2004, 85000, 'aktywny', 6),
+(7, 'motocykl', 'Honda', 'CBF', 499, 'WB8885Aaa', 'ZCPC34aa', 2004, 86000, 'aktywny', 6),
+(9, 'motocykl', 'Honda', 'CBF', 499, 'WA8885Aaaa', 'ZCPC34aaa', 2004, 85000, 'aktywny', 6),
+(10, 'motocykl', 'Honda', 'CB', 500, 'WA', 'JH2', 1999, 1000000, 'Aktywny', 6);
 
 -- --------------------------------------------------------
 
@@ -168,6 +183,19 @@ CREATE TABLE `order_status` (
   `id` int(11) NOT NULL,
   `name` varchar(15) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Zrzut danych tabeli `order_status`
+--
+
+INSERT INTO `order_status` (`id`, `name`) VALUES
+(6, 'Do odbioru'),
+(5, 'Gotowe'),
+(4, 'Oczekujące'),
+(3, 'Otwarte'),
+(1, 'Planowane'),
+(2, 'Przyjęte'),
+(7, 'Zakończone');
 
 -- --------------------------------------------------------
 
@@ -182,6 +210,13 @@ CREATE TABLE `parts` (
   `quantity` double NOT NULL,
   `serviceOrder` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Zrzut danych tabeli `parts`
+--
+
+INSERT INTO `parts` (`id`, `name`, `price`, `quantity`, `serviceOrder`) VALUES
+(1, 'cześć', 60, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -206,6 +241,14 @@ CREATE TABLE `service_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Zrzut danych tabeli `service_order`
+--
+
+INSERT INTO `service_order` (`id`, `motorcycle`, `mechanic`, `manager`, `startDate`, `endDate`, `dateOfAcceptance`, `dateOfRelase`, `mileage`, `userComments`, `managerComments`, `mechanicComments`, `orderStatus`) VALUES
+(1, 1, 7, 7, '2014-03-04 17:15:00', '2015-05-13 16:00:00', '2015-03-17 16:00:00', '2021-10-21 16:15:00', 85000, 'Nie ruszaj instalacji elektrycznej', 'motocykl przy przyjęciu ma uszkodzony zbiornik', NULL, 1),
+(2, 7, 17, 18, '2017-01-09 09:15:00', '2017-01-09 09:00:00', '2017-01-09 09:00:00', '2017-01-09 09:00:00', 86000, 'komentarz użytkownika', 'komentarz managera', NULL, 2);
+
+--
 -- Indeksy dla zrzutów tabel
 --
 
@@ -215,13 +258,6 @@ CREATE TABLE `service_order` (
 ALTER TABLE `actions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_548F1EFA78E786B` (`serviceOrder`);
-
---
--- Indexes for table `address`
---
-ALTER TABLE `address`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_D4E6F818D93D649` (`user`);
 
 --
 -- Indexes for table `customer`
@@ -285,37 +321,32 @@ ALTER TABLE `service_order`
 -- AUTO_INCREMENT dla tabeli `actions`
 --
 ALTER TABLE `actions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT dla tabeli `address`
---
-ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT dla tabeli `fos_user`
 --
 ALTER TABLE `fos_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT dla tabeli `motorcycle`
 --
 ALTER TABLE `motorcycle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT dla tabeli `order_status`
 --
 ALTER TABLE `order_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT dla tabeli `parts`
 --
 ALTER TABLE `parts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT dla tabeli `service_order`
 --
 ALTER TABLE `service_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Ograniczenia dla zrzutów tabel
 --
@@ -325,12 +356,6 @@ ALTER TABLE `service_order`
 --
 ALTER TABLE `actions`
   ADD CONSTRAINT `FK_548F1EFA78E786B` FOREIGN KEY (`serviceOrder`) REFERENCES `service_order` (`id`);
-
---
--- Ograniczenia dla tabeli `address`
---
-ALTER TABLE `address`
-  ADD CONSTRAINT `FK_D4E6F818D93D649` FOREIGN KEY (`user`) REFERENCES `customer` (`id`);
 
 --
 -- Ograniczenia dla tabeli `customer`

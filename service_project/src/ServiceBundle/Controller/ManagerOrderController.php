@@ -2,19 +2,15 @@
 
     namespace ServiceBundle\Controller;
 
-    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-    use Symfony\Component\HttpFoundation\Request;
-    use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-    use Symfony\Component\Form\Extension\Core\Type\HiddenType;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-    use ServiceBundle\Entity\Motorcycle;
-    use ServiceBundle\Entity\ServiceOrder;
-    use ServiceBundle\Entity\Action;
-    use ServiceBundle\Entity\Part;
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
     use ServiceBundle\Entity\Customer;
-    use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+    use ServiceBundle\Entity\ServiceOrder;
+    use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+    use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+    use Symfony\Component\HttpFoundation\Request;
 
     /**
      * @Route("/manager")
@@ -56,7 +52,6 @@
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $userId = $form->getData()->getUsername()->getId();
-
 
                 return $this->redirectToRoute('choose_motorcycle_for_order', array(
                             'userId' => $userId
@@ -132,7 +127,7 @@
 
         public function chooseStatus() {
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
-            $statuses = $repository->findAll();
+
             $choices = [];
             for ($i = 1; $i < 4; $i++) {
                 $choices[] = $repository->findOneById($i);
@@ -150,8 +145,8 @@
 
             return $mechanics;
         }
-        
-           public function chooseManager() {
+
+        public function chooseManager() {
             $em = $this->getDoctrine()->getManager();
             $query = $em->createQuery(
                     "SELECT e FROM \ServiceBundle\Entity\Employee e WHERE e.roles"
@@ -287,7 +282,6 @@
                             // ...
             ));
         }
-
 
         public function getActionTotal($actions) {
             $sum = 0;
