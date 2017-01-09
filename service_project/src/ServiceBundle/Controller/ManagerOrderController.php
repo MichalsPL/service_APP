@@ -32,7 +32,7 @@
                     ->getForm();
             return $this->render('ServiceBundle:Manager:add_service_order.html.twig', array(
                         'form' => $form->createView(),
-                    'type'=>'user'
+                        'type' => 'user'
             ));
         }
 
@@ -92,8 +92,8 @@
                     ->getForm();
             return $this->render('ServiceBundle:Manager:add_service_order.html.twig', array(
                         'form' => $form->createView(),
-                 'type'=>'motorcycle',
-                 'userId'=>$userId
+                        'type' => 'motorcycle',
+                        'userId' => $userId
             ));
         }
 
@@ -274,19 +274,7 @@
             return $this->render('ServiceBundle:Manager:modify_service_order.html.twig', array(
                         'form' => $form->createView(),
                         'order' => $order,
-                'message'=>'Sprawdź szczegóły zlecenia'
-            ));
-        }
-
-        /**
-         * @Route("/modifyOrder/{OrderId}")
-         */
-        public function modifyServiceOrderAction() {
-            
-               $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
-            $order = $repository->findOneById($orderId);
-            return $this->render('ServiceBundle:Manager:modify_service_order.html.twig', array(
-                            // ...
+                        'message' => 'Sprawdź szczegóły zlecenia'
             ));
         }
 
@@ -379,7 +367,48 @@
             ));
         }
 
-       
+        /**
+         * @Route("/modifyServiceOrder/{orderId}", name="manager_modify_service_order")
+         * @Method({"GET"})
+         */
+        public function modifyServiceOrderFormAction($orderId) {
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
+            $serviceOrder = $repository->findOneById($orderId);
+
+            $form = $this->createServiceOrderForm($serviceOrder);
+
+
+            return $this->render('ServiceBundle:Manager:add_service_order.html.twig', array(
+                        'form' => $form->createView(),
+            ));
+        }
+
+        /**
+         * @Route("/modifyServiceOrder/{orderId}")
+         * @Method({"POST"})
+         * 
+         */
+        public function modifyServiceOrderAction(Request $request, $orderId) {
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
+            $serviceOrder = $repository->findOneById($orderId);
+
+            $form = $this->createServiceOrderForm($serviceOrder);
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $serviceOrder = $form->getData();
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($serviceOrder);
+                $em->flush();
+                $id = $serviceOrder->getId();
+
+                return $this->redirectToRoute('order_checkout', array(
+                            'orderId' => $id
+                ));
+            } else {
+// wymyśl co jak błąd
+            }
+        }
+
         /**
          * @Route("/show_all_orders", name="manager_show_all_orders")
          */

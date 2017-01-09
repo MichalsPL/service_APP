@@ -1,6 +1,8 @@
 {% extends "ServiceBundle:Manager:base_manager.html.twig" %}
 {% block page_content %}
-
+    {% if dump is defined %}
+        {{dump(dump)}}
+           {%endif%}
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
