@@ -31,7 +31,8 @@
                     ))->add('save', 'submit', array('label' => 'zatwierdź'))
                     ->getForm();
             return $this->render('ServiceBundle:Manager:add_service_order.html.twig', array(
-                        'form' => $form->createView()
+                        'form' => $form->createView(),
+                    'type'=>'user'
             ));
         }
 
@@ -90,7 +91,9 @@
                     ))->add('save', 'submit', array('label' => 'zatwierdź'))
                     ->getForm();
             return $this->render('ServiceBundle:Manager:add_service_order.html.twig', array(
-                        'form' => $form->createView()
+                        'form' => $form->createView(),
+                 'type'=>'motorcycle',
+                 'userId'=>$userId
             ));
         }
 
@@ -270,7 +273,8 @@
 
             return $this->render('ServiceBundle:Manager:modify_service_order.html.twig', array(
                         'form' => $form->createView(),
-                        'order' => $order
+                        'order' => $order,
+                'message'=>'Sprawdź szczegóły zlecenia'
             ));
         }
 
@@ -278,6 +282,9 @@
          * @Route("/modifyOrder/{OrderId}")
          */
         public function modifyServiceOrderAction() {
+            
+               $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
+            $order = $repository->findOneById($orderId);
             return $this->render('ServiceBundle:Manager:modify_service_order.html.twig', array(
                             // ...
             ));
@@ -372,71 +379,7 @@
             ));
         }
 
-        /**
-         * @Route("/editServicePart/{partId}", name="manager_edit_part")
-         * @Method({"GET"})
-         * 
-         */
-        public function editPartActionFormAction($partId) {
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Part');
-            $servicePart = $repository->findOneById($partId);
-            $form = $this->createPartForm($servicePart);
-            $orderId = $servicePart->getServiceOrder()->getId();
-
-            return $this->render('ServiceBundle:Manager:add_service_part.html.twig', array(
-                        'form' => $form->createView(),
-                        'partId' => $partId,
-                        'orderId' => $orderId
-            ));
-        }
-
-        /**
-         * @Route("/editServicePart/{partId}")
-         * @Method({"POST"})
-         * 
-         */
-        public function editServicePartAction(Request $request, $partId) {
-
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Part');
-            $servicePart = $repository->findOneById($partId);
-
-            $form = $this->createPartForm($servicePart);
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $servicePart = $form->getData();
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($servicePart);
-                $em->flush();
-
-
-                $message = "Dodałeś nową czynność";
-            } else {
-
-                $message = "Czynność nie została dodana";
-            }
-            return $this->redirectToRoute('order_checkout', array(
-                        'orderId' => $servicePart->getServiceOrder()->getId()
-            ));
-        }
-
-        /**
-         * @Route("/deleteServicePart/{partId}", name="manager_delete_part")
-         * @Method({"GET"})
-         * 
-         */
-        public function deleteServicePartAction($partId) {
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Part');
-            $servicePart = $repository->findOneById($partId);
-            $em = $this->getDoctrine()->getManager();
-            $deleted = $servicePart;
-            $em->remove($servicePart);
-            $em->flush();
-
-            return $this->redirectToRoute('order_checkout', array(
-                        'orderId' => $deleted->getServiceOrder()->getId()
-            ));
-        }
-
+       
         /**
          * @Route("/show_all_orders", name="manager_show_all_orders")
          */

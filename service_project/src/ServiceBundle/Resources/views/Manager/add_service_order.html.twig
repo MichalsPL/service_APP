@@ -4,12 +4,12 @@
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
+    {%if type is defined%}
+        {%if type == "user"%}
+            <a href="{{ absolute_url('/manager/addCustomer') }}">Dodaj użytkownika</a>
 
-    {% if message is defined%}
-        {{dump(message)}}
+        {%elseif type == "motorcycle"%}
+            <a href="{{ path('add_motorcycle',{'userId': userId}) }}">Dodaj motocykl</a>
         {%endif%}
-        
-         {% if user is defined%}
-        {{dump(user)}}
-        {%endif%}
+    {%endif%}
 {% endblock %}
