@@ -250,26 +250,4 @@ class Employee extends User
         return $this->managerMotorcycles;
     }
 
-    /**
-     * Set address
-     *
-     * @param \ServiceBundle\Entity\Address $address
-     * @return Employee
-     */
-    public function setAddress(\ServiceBundle\Entity\Address $address = null)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return \ServiceBundle\Entity\Address 
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
 }

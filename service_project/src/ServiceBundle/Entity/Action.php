@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Actions
  *
  * @ORM\Table(name="actions")
- * @ORM\Entity(repositoryClass="ServiceBundle\Repository\ActionsRepository")
+ * @ORM\Entity(repositoryClass="ServiceBundle\Repository\ActionRepository")
  */
 class Action
 {

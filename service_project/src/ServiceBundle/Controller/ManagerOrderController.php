@@ -64,26 +64,18 @@
             }
         }
 
-        public function getUserMotorcycles($userId) {
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
-            $motorcycles = $repository->findByUserId($userId);
-            $choices = [];
-            foreach ($motorcycles as $motorcycle) {
-                $choices[] = [$motorcycle->getRegPlate() => $motorcycle->getId()];
-            }
-            return $motorcycles;
-        }
-
         /**
          * @Route("/chooseOrderMotorcycle/{userId}", name="choose_motorcycle_for_order")
          * @Method({"GET"})
          */
         public function addServiceOrderMotorcycleAction($userId) {
             $serviceOrder = new ServiceOrder;
+            $em = $this->getDoctrine()->getManager();
+            $motorcycles = $em->getRepository('ServiceBundle:Motorcycle')->getCustomerMotorcycles($userId);
             $form = $this->createFormBuilder($serviceOrder)
                     ->add('motorcycle', ChoiceType::class, array(
                         'choices' =>
-                        $this->getUserMotorcycles($userId),
+                        $motorcycles,
                         'choices_as_values' => true,
                         'choice_label' => 'regPlate',
                         'label' => 'Wybierz motocykl',
@@ -128,49 +120,25 @@
             }
         }
 
-        public function chooseStatus() {
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
-
-            $choices = [];
-            for ($i = 1; $i < 4; $i++) {
-                $choices[] = $repository->findOneById($i);
-            }
-
-            return $choices;
-        }
-
-        public function chooseMechanic() {
+        private function createServiceOrderForm($serviceOrder) {
             $em = $this->getDoctrine()->getManager();
-            $query = $em->createQuery(
-                    "SELECT e FROM \ServiceBundle\Entity\Employee e WHERE e.roles"
-                    . " LIKE '%ROLE_MECHANIC%' AND e.enabled = 1 ");
-            $mechanics = $query->getResult();
-
-            return $mechanics;
-        }
-
-        public function chooseManager() {
+            $statuses = $em->getRepository('ServiceBundle:ServiceOrder')->chooseStatusForAddOrder();
             $em = $this->getDoctrine()->getManager();
-            $query = $em->createQuery(
-                    "SELECT e FROM \ServiceBundle\Entity\Employee e WHERE e.roles"
-                    . " LIKE '%ROLE_MANAGER%' AND e.enabled = 1 ");
-            $managers = $query->getResult();
+            $mechanics = $em->getRepository('ServiceBundle:Employee')->chooseMechanic();
+            $em = $this->getDoctrine()->getManager();
+            $managers = $em->getRepository('ServiceBundle:Employee')->chooseManager();
 
-            return $managers;
-        }
-
-        public function createServiceOrderForm($serviceOrder) {
             $form = $this->createFormBuilder($serviceOrder)
                     ->add('mileage', null, array('attr' => array('class' => 'form-control')))
                     ->add('manager', ChoiceType::class, array('choices_as_values' => true,
                         'choice_label' => 'name',
                         'label' => 'Wybierz Managera',
-                        'choices' => $this->chooseManager(),
+                        'choices' => $managers,
                         'attr' => array('class' => 'form-control')))
                     ->add('mechanic', ChoiceType::class, array('choices_as_values' => true,
                         'choice_label' => 'name',
                         'label' => 'Wybierz Mechanika',
-                        'choices' => $this->chooseMechanic(),
+                        'choices' => $mechanics,
                         'attr' => array('class' => 'form-control')))
                     ->add('startDate', DateTimeType::class, array(
                         'placeholder' => array(
@@ -203,7 +171,7 @@
                     ->add('orderStatus', ChoiceType::class, array('choices_as_values' => true,
                         'choice_label' => 'name',
                         'label' => 'Wybierz status',
-                        'choices' => $this->chooseStatus(),
+                        'choices' => $statuses,
                         'attr' => array('class' => 'form-control')))
                     ->add('save', 'submit', array('label' => 'zatwierdź'))
                     ->getForm();
@@ -257,24 +225,6 @@
             }
         }
 
-
-
-        public function getActionTotal($actions) {
-            $sum = 0;
-            foreach ($actions as $action) {
-                $sum += $action->getPrice();
-            }
-            return $sum;
-        }
-
-        public function getPartsTotal($parts) {
-            $sum = 0;
-            foreach ($parts as $part) {
-                $sum += $part->getPrice();
-            }
-            return $sum;
-        }
-
         /**
          * @Route("/orderCheckout/{orderId}", name="order_checkout")
          * @Method({"GET"})
@@ -293,13 +243,15 @@
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
             $motorcycle = $repository->findOneById($motorcycleId);
 
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Action');
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Actions');
             $serviceActions = $repository->findByServiceOrder($orderId);
-            $actionsSum = $this->getActionTotal($serviceActions);
+            $em = $this->getDoctrine()->getManager();
+            $actionsSum = $em->getRepository('ServiceBundle:Action')->getActionsTotal($serviceActions);
 
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Part');
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Parts');
             $serviceParts = $repository->findByServiceOrder($orderId);
-            $partsSum = $this->getPartsTotal($serviceParts);
+            $em = $this->getDoctrine()->getManager();
+            $partsSum = $em->getRepository('ServiceBundle:Part')->getPartsTotal($serviceParts);
 
             $form = $this->createFormBuilder($serviceOrder)
                     ->add('userComments', null, array('attr' => array('class' => 'form-control')))
@@ -420,7 +372,8 @@
          */
         public function showOrdersByStatusAction($statusId) {
             $em = $this->getDoctrine()->getManager();
-            $query = $em->createQuery('SELECT s FROM ServiceBundle:ServiceOrder s WHERE s.orderStatus = ' . $statusId . 'ORDER BY s.id');
+            $query = $em->createQuery('SELECT s FROM ServiceBundle:ServiceOrder s WHERE s.orderStatus = '
+                    . $statusId . 'ORDER BY s.id');
             $allOrders = $query->getResult();
             $orders = [];
             foreach ($allOrders as $order) {

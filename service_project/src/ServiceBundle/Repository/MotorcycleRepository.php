@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class MotorcycleRepository extends EntityRepository
 {
+                public function getCustomerMotorcyclesRegPlateID($customerId) {
+          
+            $motorcycles = $this->findByUserId($customerId);
+            $choices = [];
+            foreach ($motorcycles as $motorcycle) {
+                $choices[] = [$motorcycle->getRegPlate() => $motorcycle->getId()];
+            }
+            return $motorcycles;
+        }
+        
+          public function getCustomerMotorcycles($userId) {
+
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
+            $motorcycles = $repository->findByUserId($userId);
+
+            return $motorcycles;
+        }
 }

@@ -13,14 +13,6 @@
      */
     class ManagerActionController extends Controller {
 
-        public function TotalActionPrice($actions) {
-            $price = 0;
-            foreach ($actions as $action) {
-                $price += $action->getPrice();
-            }
-            return $price;
-        }
-
         public function createActionForm($action) {
 
             $form = $this->createFormBuilder($action)
@@ -68,7 +60,10 @@
                 $em->persist($serviceAction);
                 $em->flush();
                 $actions[] = $serviceAction;
-                $price = $this->TotalActionPrice($actions);
+
+                $em = $this->getDoctrine()->getManager();
+                $price = $em->getRepository('ServiceBundle:Action')
+                        ->getActionsTotal($actions);
                 $serviceAction = new Action;
                 $form = $this->createActionForm($serviceAction, $orderId);
 
@@ -122,16 +117,14 @@
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($serviceAction);
                 $em->flush();
-
-
-                $message = "Dodałeś nową czynność";
-            } else {
-
-                $message = "Czynność nie została dodana";
-            }
-            return $this->redirectToRoute('order_checkout', array(
+ return $this->redirectToRoute('order_checkout', array(
                         'orderId' => $serviceAction->getServiceOrder()->getId()
             ));
+
+            } else {
+// co jak błąd
+            }
+           
         }
 
         /**
@@ -188,15 +181,13 @@
                 $em->persist($servicePart);
                 $em->flush();
 
-
-                $message = "Dodałeś nową czynność";
-            } else {
-
-                $message = "Czynność nie została dodana";
-            }
-            return $this->redirectToRoute('order_checkout', array(
+     return $this->redirectToRoute('order_checkout', array(
                         'orderId' => $servicePart->getServiceOrder()->getId()
             ));
+            } else {
+// co jak błąd
+            }
+       
         }
 
         /**

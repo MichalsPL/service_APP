@@ -13,7 +13,7 @@
      */
     class UserController extends Controller {
 
-        public function getUserMotorcycles() {
+        private function getUserMotorcycles() {
             $userId = $this->container->get('security.context')->getToken()->getUser()->getId();
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
@@ -22,7 +22,7 @@
             return $motorcycles;
         }
 
-        public function getUserOrders() {
+        private function getUserOrders() {
 
             $orders = [];
             $motorcycles = $this->getUserMotorcycles();
@@ -115,7 +115,7 @@
             }
         }
 
-        public function editUserForm($user) {
+        private function editUserForm($user) {
             $form = $this->createFormBuilder($user)
                     ->add('name')
                     ->add('surname')
@@ -183,7 +183,7 @@
                             'home' => 'wróć'
                 ));
             } else {
-                
+                // co jak błąd 
             }
         }
 

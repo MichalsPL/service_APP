@@ -21,7 +21,7 @@
      */
     class ManagerMotorcycleController extends Controller {
 
-        public function createMotorcycleForm($motorcycle) {
+        private function createMotorcycleForm($motorcycle) {
 
             $form = $this->createFormBuilder($motorcycle)
                     ->add('type', null, array('attr' => array('class' => 'form-control')))
@@ -74,8 +74,6 @@
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $userId = $form->getData()->getUsername()->getId();
-
-
                 return $this->redirectToRoute('add_motorcycle', array(
                             'userId' => $userId
                 ));
@@ -130,8 +128,9 @@
          * @Method({"GET"})
          */
         public function modifyMotorcycleFormAction($motorcycleId) {
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
-            $motorcycle = $repository->findOneById($motorcycleId);
+            $motorcycle = $this->getDoctrine()
+                    ->getRepository('ServiceBundle:Motorcycle')
+                    ->findOneById($motorcycleId);
             $form = $this->createMotorcycleForm($motorcycle);
             return $this->render('ServiceBundle:Manager/Motorcycle:add_motorcycle.html.twig', array(
                         'form' => $form->createView(),
@@ -144,8 +143,9 @@
          * @Method({"POST"})
          */
         public function modifyMotorcycleAction(Request $request, $motorcycleId) {
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
-            $motorcycle = $repository->findOneById($motorcycleId);
+            $motorcycle = $this->getDoctrine()
+                    ->getRepository('ServiceBundle:Motorcycle')
+                    ->findOneById($motorcycleId);
             $form = $this->createMotorcycleForm($motorcycle);
             $form->handleRequest($request);
             if ($form->isValid()) {
@@ -159,7 +159,7 @@
             }
             return $this->render('ServiceBundle:Manager/Motorcycle:show_motorcycle.html.twig', array(
                         'message' => $message,
-                        'motorcycle'=> $motorcycle
+                        'motorcycle' => $motorcycle
             ));
         }
 
@@ -176,12 +176,13 @@
             ));
         }
 
-        public function getMotorcycleOrders($motorcycle) {
+        private function getMotorcycleOrders($motorcycle) {
 
             $orders = [];
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
+            $motorcycleOrders = $this->getDoctrine()
+                    ->getRepository('ServiceBundle:ServiceOrder')
+                    ->findByMotorcycle($motorcycleId);
             $motorcycleId = $motorcycle->getId();
-            $motorcycleOrders = $repository->findByMotorcycle($motorcycleId);
             foreach ($motorcycleOrders as $order) {
                 $orders[] = $order;
             }
@@ -193,8 +194,9 @@
          * 
          */
         public function showOneMotorcycleAction($id) {
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
-            $motorcycle = $repository->findOneById($id);
+            $motorcycle = $this->getDoctrine()
+                    ->getRepository('ServiceBundle:Motorcycle')
+                    ->findOneById($id);
             $orders = $this->getMotorcycleOrders($motorcycle);
 
             return $this->render('ServiceBundle:Manager/Motorcycle:show_motorcycle.html.twig', array(

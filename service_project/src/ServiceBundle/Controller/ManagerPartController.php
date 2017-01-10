@@ -2,13 +2,11 @@
 
     namespace ServiceBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
-use ServiceBundle\Entity\Part;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Symfony\Component\HttpFoundation\Request;
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+    use ServiceBundle\Entity\Part;
+    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    use Symfony\Component\HttpFoundation\Request;
 
     /**
      * @Route("/manager")
@@ -27,14 +25,6 @@ use Symfony\Component\HttpFoundation\Request;
                     ->add('save', 'submit', array('label' => 'zatwierdź'))
                     ->getForm();
             return $form;
-        }
-
-        public function TotalPartsPrice($parts) {
-            $price = 0;
-            foreach ($parts as $part) {
-                $price += $part->getPrice();
-            }
-            return $price;
         }
 
         /**
@@ -74,7 +64,9 @@ use Symfony\Component\HttpFoundation\Request;
                 $em->persist($part);
                 $em->flush();
                 $parts[] = $part;
-                $price = $this->TotalPartsPrice($parts);
+                $em = $this->getDoctrine()->getManager();
+                $price = $em->getRepository('ServiceBundle:Part')
+                        ->getPartsTotal($parts);
                 $part = new Part;
                 $form = $this->createPartForm($part);
                 $message = "dodałeś nowe zlecenie";

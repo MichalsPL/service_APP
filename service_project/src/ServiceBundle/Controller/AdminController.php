@@ -27,26 +27,11 @@
          */
         public function managerShowAllEmployeesAction() {
 
-            $admins = $this->getDoctrine()->getRepository('ServiceBundle:Employee')
-                    ->createQueryBuilder('e')
-                    ->where('e.roles LIKE :role')
-                    ->setParameter('role', '%ROLE_ADMIN%')
-                    ->getQuery()
-                    ->getResult();
-
-            $mechanics = $this->getDoctrine()->getRepository('ServiceBundle:Employee')
-                    ->createQueryBuilder('e')
-                    ->where('e.roles LIKE :role')
-                    ->setParameter('role', '%ROLE_MECHANIC%')
-                    ->getQuery()
-                    ->getResult();
-
-            $managers = $this->getDoctrine()->getRepository('ServiceBundle:Employee')
-                    ->createQueryBuilder('e')
-                    ->where('e.roles LIKE :role')
-                    ->setParameter('role', '%ROLE_MANAGER%')
-                    ->getQuery()
-                    ->getResult();
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('ServiceBundle:Employee');
+            $admins = $repository->getAllAdmins();
+            $mechanics = $repository->getAllMechanics();
+            $managers = $repository->getAllManagers();
 
             return $this->render('ServiceBundle:Admin:admin_show_all_employees.html.twig', array(
                         'admins' => $admins,
@@ -89,7 +74,7 @@
             return $this->redirectToRoute('admin_show_employee', array('employeeId' => $employeeId));
         }
 
-        public function editEmployeeForm($employee) {
+        private function editEmployeeForm($employee) {
             $form = $this->createFormBuilder($employee)
                     ->setMethod('POST')
                     ->add('name')
@@ -149,7 +134,7 @@
                             'home' => 'wróć'
                 ));
             } else {
-                
+                // wymyśl co jak błąd
             }
         }
 

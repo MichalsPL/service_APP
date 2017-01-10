@@ -156,9 +156,9 @@
             } else {
                 
             }
-        }    
-            
-                  /**
+        }
+
+        /**
          * @Route("/orderWaiting/{orderId}", name="manager_order_waiting")
          * @Method({"GET"})
          * 
@@ -226,7 +226,7 @@
             }
         }
 
-                          /**
+        /**
          * @Route("/orderReady/{orderId}", name="manager_order_ready")
          * @Method({"GET"})
          * 
@@ -293,8 +293,8 @@
                 
             }
         }
-        
-                         /**
+
+        /**
          * @Route("/orderReadyCollect/{orderId}", name="manager_order_ready_collect")
          * @Method({"GET"})
          * 
@@ -361,8 +361,8 @@
                 
             }
         }
-        
-                       /**
+
+        /**
          * @Route("/orderEnd/{orderId}", name="manager_order_end")
          * @Method({"GET"})
          * 
@@ -429,8 +429,8 @@
                 
             }
         }
-        
-                               /**
+
+        /**
          * @Route("/orderCancell/{orderId}", name="manager_order_cancell")
          * @Method({"GET"})
          * 

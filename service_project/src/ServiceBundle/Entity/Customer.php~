@@ -169,30 +169,6 @@
             return $this->phoneNo;
         }
 
-    
-    /**
-     * Set address
-     *
-     * @param \ServiceBundle\Entity\Address $address
-     * @return Customer
-     */
-    public function setAddress(\ServiceBundle\Entity\Address $address = null)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return \ServiceBundle\Entity\Address 
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
     /**
      * Add motorcycles
      *
