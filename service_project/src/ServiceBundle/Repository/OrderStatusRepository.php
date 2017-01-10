@@ -14,11 +14,11 @@
 
         public function chooseStatusForAddOrder() {
 
-
             $choices = [];
             for ($i = 1; $i < 4; $i++) {
                 $choices[] = $this->findOneById($i);
             }
+            return $choices;
         }
 
     }

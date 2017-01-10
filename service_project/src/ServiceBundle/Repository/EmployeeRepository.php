@@ -13,8 +13,7 @@
     class EmployeeRepository extends EntityRepository {
 
         public function getActiveMechanic() {
-            $em = $this->getDoctrine()->getManager();
-            $query = $em->createQuery(
+            $query = $this->getEntityManager()->createQuery(
                     "SELECT e FROM \ServiceBundle\Entity\Employee e WHERE e.roles"
                     . " LIKE '%ROLE_MECHANIC%' AND e.enabled = 1 ");
             $mechanics = $query->getResult();
@@ -23,8 +22,7 @@
         }
 
         public function getActiveManager() {
-            $em = $this->getDoctrine()->getManager();
-            $query = $em->createQuery(
+            $query = $this->getEntityManager()->createQuery(
                     "SELECT e FROM \ServiceBundle\Entity\Employee e WHERE e.roles"
                     . " LIKE '%ROLE_MANAGER%' AND e.enabled = 1 ");
             $managers = $query->getResult();

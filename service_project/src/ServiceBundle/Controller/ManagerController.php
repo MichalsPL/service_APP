@@ -139,8 +139,9 @@
             $customer = $this->getDoctrine($customerId)
                     ->getRepository('ServiceBundle:Customer')
                     ->findOneById($customerId);
-
-            $userMotorcycles = $this->getUserMotorcycles($customerId);
+            $em = $this->getDoctrine()->getManager();
+            $userMotorcycles = $em->getRepository('ServiceBundle:Motorcycle')
+                    ->getCustomerMotorcycles($customerId);
 
             $userOrders = $this->getUserOrders($customerId);
             return $this->render('ServiceBundle:Manager:customers_show_one.html.twig', array(

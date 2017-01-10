@@ -179,10 +179,10 @@
         private function getMotorcycleOrders($motorcycle) {
 
             $orders = [];
+            $motorcycleId = $motorcycle->getId();
             $motorcycleOrders = $this->getDoctrine()
                     ->getRepository('ServiceBundle:ServiceOrder')
-                    ->findByMotorcycle($motorcycleId);
-            $motorcycleId = $motorcycle->getId();
+                    ->findByMotorcycle($motorcycleId);  
             foreach ($motorcycleOrders as $order) {
                 $orders[] = $order;
             }

@@ -122,11 +122,9 @@
 
         private function createServiceOrderForm($serviceOrder) {
             $em = $this->getDoctrine()->getManager();
-            $statuses = $em->getRepository('ServiceBundle:ServiceOrder')->chooseStatusForAddOrder();
-            $em = $this->getDoctrine()->getManager();
-            $mechanics = $em->getRepository('ServiceBundle:Employee')->chooseMechanic();
-            $em = $this->getDoctrine()->getManager();
-            $managers = $em->getRepository('ServiceBundle:Employee')->chooseManager();
+            $statuses = $em->getRepository('ServiceBundle:OrderStatus')->chooseStatusForAddOrder();       
+            $mechanics = $em->getRepository('ServiceBundle:Employee')->getActiveMechanic();
+            $managers = $em->getRepository('ServiceBundle:Employee')->getActiveManager();
 
             $form = $this->createFormBuilder($serviceOrder)
                     ->add('mileage', null, array('attr' => array('class' => 'form-control')))
@@ -243,12 +241,12 @@
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
             $motorcycle = $repository->findOneById($motorcycleId);
 
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Actions');
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Action');
             $serviceActions = $repository->findByServiceOrder($orderId);
             $em = $this->getDoctrine()->getManager();
             $actionsSum = $em->getRepository('ServiceBundle:Action')->getActionsTotal($serviceActions);
 
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Parts');
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Part');
             $serviceParts = $repository->findByServiceOrder($orderId);
             $em = $this->getDoctrine()->getManager();
             $partsSum = $em->getRepository('ServiceBundle:Part')->getPartsTotal($serviceParts);

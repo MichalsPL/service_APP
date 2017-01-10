@@ -24,8 +24,7 @@ class MotorcycleRepository extends EntityRepository
         
           public function getCustomerMotorcycles($userId) {
 
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
-            $motorcycles = $repository->findByUserId($userId);
+            $motorcycles = $this->findByUserId($userId);
 
             return $motorcycles;
         }
