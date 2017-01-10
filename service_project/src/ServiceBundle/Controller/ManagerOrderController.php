@@ -257,26 +257,7 @@
             }
         }
 
-        /**
-         * @Route("/checkoutOrder/{orderId}", name="manager_order_checkout")
-         * 
-         * @Method({"GET"})
-         */
-        public function checkoutServiceOrderAction($orderId) {
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
-            $order = $repository->findOneById($orderId);
-            $form = $this->createFormBuilder($order)
-                    ->add('userComments', null, array('attr' => array('class' => 'form-control')))
-                    ->add('ManagerComments', null, array('attr' => array('class' => 'form-control')))
-                    ->add('save', 'submit', array('label' => 'zatwierdź'))
-                    ->getForm();
 
-            return $this->render('ServiceBundle:Manager:modify_service_order.html.twig', array(
-                        'form' => $form->createView(),
-                        'order' => $order,
-                        'message' => 'Sprawdź szczegóły zlecenia'
-            ));
-        }
 
         public function getActionTotal($actions) {
             $sum = 0;
@@ -303,6 +284,10 @@
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
             $serviceOrder = $repository->findOneById($orderId);
+
+            $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
+            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
+            $serviceOrder->setOrderStatus($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
@@ -335,7 +320,7 @@
         }
 
         /**
-         * @Route("/orderCheckout/{orderId}", name="manager_order_checkout")
+         * @Route("/orderCheckout/{orderId}")
          * @Method({"POST"})
          * 
          */

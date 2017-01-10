@@ -1,0 +1,82 @@
+{% extends "ServiceBundle:Manager:base_manager.html.twig" %}
+{% block page_content %}
+
+    <h1>Przyjmujesz motocykl do serwisu </h1>
+    <hr>
+    <h4>Motocykl</h4>
+    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+        <thead>
+            <tr>
+                <th>Marka</th>
+                <th>Model</th>
+                <th>Pojemność</th>
+                <th>Rocznik</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{motorcycle.make}}</td>
+                <td>{{motorcycle.model}}</td>
+                <td>{{motorcycle.capacity}}</td>
+                <td>{{motorcycle.year}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+        <thead>
+            <tr>
+                <th>Nr. Rej.</th>
+                <th>VIN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{motorcycle.regPlate}}</td>
+                <td>{{motorcycle.vin}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('manager_modify_motorcycle',  { 'motorcycleId': motorcycle.id }) }}">Edytuj Motocykl</a>
+
+    <hr>
+    <h4>Zlecenie</h4>
+    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+        <thead>
+            <tr>
+                <th>data przyjęcia</th>
+                <th>planowana data rozpoczęcia prac</th>
+                <th>planowana data zakończenia prac</th>
+                <th>planowana data odbioru</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{order.dateOfAcceptance.date}}</td>
+                <td>{{order.startDate.date}}</td>
+                <td>{{order.endDate.date}}</td>
+                <td>{{order.dateOfRelase.date}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+        <thead>
+            <tr>
+                <th>Osoba Przyjmująca</th>
+                <th>Mechanik</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{order.manager.name}} {{order.manager.surname}}</td>
+                <td>{{order.mechanic.name}} {{order.mechanic.surname}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+            <h4>Potwierdź przebieg jeśli masz uwagi do motocykla wpisz je</h4>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
