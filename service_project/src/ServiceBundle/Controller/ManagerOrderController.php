@@ -356,8 +356,8 @@
             $allOrders = $query->getResult();
             $orders = [];
             foreach ($allOrders as $order) {
-                $orderName = $order->Id()->getName();
-                $order->setOrderStatus($orderName);
+                $orderStatusName = $order->getOrderStatusId();
+                $order->setOrderStatusId($orderStatusName);
                 $orders[] = $order;
             }
             $message = "widzisz wszystkie zlecenia";

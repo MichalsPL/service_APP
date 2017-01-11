@@ -126,7 +126,7 @@
                     ->add('street')
                     ->add('houseNo')
                     ->add('aptNo')
-                    ->add('password', null, array(
+                    ->add('plainPassword', null, array(
                         'data' => '',
                         'required' => false
                     ))
@@ -157,16 +157,7 @@
         public function changeUserDetailsAction(Request $request) {
             $user = $this->getUser();
 
-            $form = $this->createFormBuilder($user)
-                    ->add('name')
-                    ->add('surname')
-                    ->add('email')
-                    ->add('password', null, array(
-                        'data' => '',
-                        'required' => false
-                    ))
-                    ->add('save', 'submit', array('label' => 'zatwierdź'))
-                    ->getForm();
+            $form = $this->editUserForm($user);
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $userManager = $this->container->get('fos_user.user_manager');
@@ -185,6 +176,7 @@
                 ));
             } else {
                 // co jak błąd 
+                
             }
         }
 

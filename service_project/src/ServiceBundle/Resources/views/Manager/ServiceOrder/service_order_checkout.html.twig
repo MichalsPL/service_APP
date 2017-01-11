@@ -3,28 +3,27 @@
 
     <h1> Widzisz podsumowanie zlecenia</h1>
     <h4>status zlecenia: {{order.orderStatusId.name}}</h4>
-    {{dump(order)}}
     {%if order.orderStatusId.id == 1%}
         jak planowane
       <a href="{{ path('manager_order_accept',  { 'orderId': order.id }) }}">Edytuj Użytkownika</a>
         manager_order_accept
         otwórz
         anuluj
-    {%elseif order.orderStatus.id == 2%}
+    {%elseif order.orderStatusId.id == 2%}
         jak przyjęte 
         otwórz 
         anuluj
-    {%elseif order.orderStatus.id == 3%}
+    {%elseif order.orderStatusId.id == 3%}
         jak otwarte
         oczekujące
         gotowe
         do odbioru 
         anuluj
-    {%elseif order.orderStatus.id == 4%}
+    {%elseif order.orderStatusId.id == 4%}
         jak jak oczekujące
         zaplanuj (postępowanie no właśnie jakie)
         gotowe
-    {%elseif order.orderStatus.id == 5%}
+    {%elseif order.orderStatusId.id == 5%}
 
         jak gotowe
         do odbioru 
