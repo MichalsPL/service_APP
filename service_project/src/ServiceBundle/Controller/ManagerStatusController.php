@@ -154,7 +154,7 @@
                             'orderId' => $orderId
                 ));
             } else {
-                
+  // co jak błąd              
             }
         }
 
@@ -222,7 +222,7 @@
                             'orderId' => $orderId
                 ));
             } else {
-                
+                // co jak błąd
             }
         }
 
@@ -290,7 +290,7 @@
                             'orderId' => $orderId
                 ));
             } else {
-                
+  // co jak błąd              
             }
         }
 
@@ -358,7 +358,7 @@
                             'orderId' => $orderId
                 ));
             } else {
-                
+                // co jak błąd
             }
         }
 
@@ -426,7 +426,7 @@
                             'orderId' => $orderId
                 ));
             } else {
-                
+                // co jak błąd
             }
         }
 
@@ -494,7 +494,7 @@
                             'orderId' => $orderId
                 ));
             } else {
-                
+                // co jak błąd 
             }
         }
 

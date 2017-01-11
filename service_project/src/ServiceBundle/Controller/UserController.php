@@ -38,18 +38,6 @@
             return $orders;
         }
 
-        public function getMotorcycleOrders($motorcycle) {
-
-            $orders = [];
-            $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
-            $motorcycleId = $motorcycle->getId();
-            $motorcycleOrders = $repository->findByMotorcycle($motorcycleId);
-            foreach ($motorcycleOrders as $order) {
-                $orders[] = $order;
-            }
-            return $orders;
-        }
-
         /**
          * @Route("/", name="user_index")
          */
@@ -73,7 +61,9 @@
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
             $motorcycle = $repository->findOneById($id);
 
-            $orders = $this->getMotorcycleOrders($motorcycle);
+            $em = $this->getDoctrine()->getManager();
+            $orders = $em->getRepository('ServiceBundle:Motorycle')
+                    ->getMotorcycleOrders($motorcycle);
 
             if ($motorcycle->getUserId()->getId() == $userId) {
 

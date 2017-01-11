@@ -176,19 +176,6 @@
             ));
         }
 
-        private function getMotorcycleOrders($motorcycle) {
-
-            $orders = [];
-            $motorcycleId = $motorcycle->getId();
-            $motorcycleOrders = $this->getDoctrine()
-                    ->getRepository('ServiceBundle:ServiceOrder')
-                    ->findByMotorcycle($motorcycleId);  
-            foreach ($motorcycleOrders as $order) {
-                $orders[] = $order;
-            }
-            return $orders;
-        }
-
         /**
          * @Route("/showOne/{id}", name="manager_show_motorcycle")
          * 
@@ -197,7 +184,9 @@
             $motorcycle = $this->getDoctrine()
                     ->getRepository('ServiceBundle:Motorcycle')
                     ->findOneById($id);
-            $orders = $this->getMotorcycleOrders($motorcycle);
+            $em = $this->getDoctrine()->getManager();
+            $orders = $em->getRepository('ServiceBundle:Motorycle')
+                    ->getMotorcycleOrders($motorcycle);
 
             return $this->render('ServiceBundle:Manager/Motorcycle:show_motorcycle.html.twig', array(
                         'motorcycle' => $motorcycle,

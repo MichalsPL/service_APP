@@ -28,4 +28,17 @@ class MotorcycleRepository extends EntityRepository
 
             return $motorcycles;
         }
+
+          private function getMotorcycleOrders($motorcycle) {
+
+            $orders = [];
+            $motorcycleId = $motorcycle->getId();
+            $motorcycleOrders = $this->getDoctrine()
+                    ->getRepository('ServiceBundle:ServiceOrder')
+                    ->findByMotorcycle($motorcycleId);  
+            foreach ($motorcycleOrders as $order) {
+                $orders[] = $order;
+            }
+            return $orders;
+        }
 }

@@ -74,7 +74,6 @@
 
                 $message = "zlecenie  nie zostało dodane";
             }
-
             return $this->render('ServiceBundle:Manager:add_service_part.html.twig', array(
                         'form' => $form->createView(),
                         'message' => $message,
@@ -83,6 +82,5 @@
                         'price' => $price
             ));
         }
-
     }
     
