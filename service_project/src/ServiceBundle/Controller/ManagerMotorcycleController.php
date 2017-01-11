@@ -185,7 +185,7 @@
                     ->getRepository('ServiceBundle:Motorcycle')
                     ->findOneById($id);
             $em = $this->getDoctrine()->getManager();
-            $orders = $em->getRepository('ServiceBundle:Motorycle')
+            $orders = $em->getRepository('ServiceBundle:Motorcycle')
                     ->getMotorcycleOrders($motorcycle);
 
             return $this->render('ServiceBundle:Manager/Motorcycle:show_motorcycle.html.twig', array(

@@ -33,7 +33,7 @@
         /**
          * 
          * 
-         * @ORM\OneToMany(targetEntity="ServiceOrder", mappedBy="orderStatus_id")
+         * @ORM\OneToMany(targetEntity="ServiceOrder", mappedBy="orderStatusId")
          */
         private $orders;
 

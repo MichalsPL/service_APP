@@ -24,8 +24,8 @@
             $serviceOrder = $repository->findOneById($orderId);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
-            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
-            $serviceOrder->setOrderStatus($orderStatus);
+            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatusId()->getId());
+            $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
@@ -69,7 +69,7 @@
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $serviceOrder = $form->getData();
-                $serviceOrder->setOrderStatus($orderStatus);
+                $serviceOrder->setOrderStatusId($orderStatus);
                 $serviceOrder->setStartDate(new DateTime());
                 $motorcycle->setMileage($serviceOrder->getMileage());
                 $em = $this->getDoctrine()->getManager();
@@ -100,7 +100,7 @@
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
             $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
-            $serviceOrder->setOrderStatus($orderStatus);
+            $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
@@ -144,7 +144,7 @@
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $serviceOrder = $form->getData();
-                $serviceOrder->setOrderStatus($orderStatus);
+                $serviceOrder->setOrderStatusId($orderStatus);
                 $serviceOrder->setStartDate(new DateTime());
                 $motorcycle->setMileage($serviceOrder->getMileage());
                 $em = $this->getDoctrine()->getManager();
@@ -170,7 +170,7 @@
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
             $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
-            $serviceOrder->setOrderStatus($orderStatus);
+            $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
@@ -212,7 +212,7 @@
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $serviceOrder = $form->getData();
-                $serviceOrder->setOrderStatus($orderStatus);
+                $serviceOrder->setOrderStatusId($orderStatus);
                 $serviceOrder->setStartDate(new DateTime());
                 $motorcycle->setMileage($serviceOrder->getMileage());
                 $em = $this->getDoctrine()->getManager();
@@ -238,7 +238,7 @@
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
             $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
-            $serviceOrder->setOrderStatus($orderStatus);
+            $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
@@ -280,7 +280,7 @@
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $serviceOrder = $form->getData();
-                $serviceOrder->setOrderStatus($orderStatus);
+                $serviceOrder->setOrderStatusId($orderStatus);
                 $serviceOrder->setStartDate(new DateTime());
                 $motorcycle->setMileage($serviceOrder->getMileage());
                 $em = $this->getDoctrine()->getManager();
@@ -306,7 +306,7 @@
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
             $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
-            $serviceOrder->setOrderStatus($orderStatus);
+            $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
@@ -348,7 +348,7 @@
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $serviceOrder = $form->getData();
-                $serviceOrder->setOrderStatus($orderStatus);
+                $serviceOrder->setOrderStatusId($orderStatus);
                 $serviceOrder->setStartDate(new DateTime());
                 $motorcycle->setMileage($serviceOrder->getMileage());
                 $em = $this->getDoctrine()->getManager();
@@ -374,7 +374,7 @@
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
             $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
-            $serviceOrder->setOrderStatus($orderStatus);
+            $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
@@ -416,7 +416,7 @@
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $serviceOrder = $form->getData();
-                $serviceOrder->setOrderStatus($orderStatus);
+                $serviceOrder->setOrderStatusId($orderStatus);
                 $serviceOrder->setStartDate(new DateTime());
                 $motorcycle->setMileage($serviceOrder->getMileage());
                 $em = $this->getDoctrine()->getManager();
@@ -442,7 +442,7 @@
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
             $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
-            $serviceOrder->setOrderStatus($orderStatus);
+            $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
@@ -484,7 +484,7 @@
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $serviceOrder = $form->getData();
-                $serviceOrder->setOrderStatus($orderStatus);
+                $serviceOrder->setOrderStatusId($orderStatus);
                 $serviceOrder->setStartDate(new DateTime());
                 $motorcycle->setMileage($serviceOrder->getMileage());
                 $em = $this->getDoctrine()->getManager();

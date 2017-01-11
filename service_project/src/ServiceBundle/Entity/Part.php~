@@ -25,7 +25,7 @@ class Part
 *@ORM\ManyToOne(targetEntity="ServiceOrder", inversedBy="usedParts")
      * @ORM\JoinColumn(name="serviceOrder", referencedColumnName="id")
      */
-    private $serviceOrder;
+    private $serviceOrderId;
 
     /**
      * @var string
@@ -65,9 +65,9 @@ class Part
      * @param integer $serviceOrder
      * @return Parts
      */
-    public function setServiceOrder($serviceOrder)
+    public function setServiceOrderId($serviceOrder)
     {
-        $this->serviceOrder = $serviceOrder;
+        $this->serviceOrderId = $serviceOrder;
 
         return $this;
     }
@@ -77,9 +77,9 @@ class Part
      *
      * @return integer 
      */
-    public function getServiceOrder()
+    public function getServiceOrderId()
     {
-        return $this->serviceOrder;
+        return $this->serviceOrderId;
     }
 
     /**

@@ -36,22 +36,26 @@
                     ->setParameter('role', '%ROLE_ADMIN%')
                     ->getQuery()
                     ->getResult();
+            return $admins;
         }
 
         public function getAllManagers() {
-            $admins = $this->createQueryBuilder('e')
+            $managers = $this->createQueryBuilder('e')
                     ->where('e.roles LIKE :role')
                     ->setParameter('role', '%ROLE_MANAGER%')
                     ->getQuery()
                     ->getResult();
+            return $managers;
         }
 
         public function getAllMechanics() {
-            $admins = $this->createQueryBuilder('e')
+            $mechanics = $this->createQueryBuilder('e')
                     ->where('e.roles LIKE :role')
                     ->setParameter('role', '%ROLE_MECHANIC%')
                     ->getQuery()
                     ->getResult();
+            
+            return $mechanics;
         }
 
     }

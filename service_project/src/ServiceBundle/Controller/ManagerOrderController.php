@@ -95,10 +95,12 @@
          */
         public function ChooseServiceOrderMotorcycleAction(Request $request, $userId) {
             $serviceOrder = new ServiceOrder;
+            $em = $this->getDoctrine()->getManager();
+            $motorcycles = $em->getRepository('ServiceBundle:Motorcycle')->getCustomerMotorcycles($userId);
             $form = $this->createFormBuilder($serviceOrder)
                     ->add('motorcycle', ChoiceType::class, array(
                         'choices' =>
-                        $this->getUserMotorcycles($userId),
+                        $motorcycles,
                         'choices_as_values' => true,
                         'choice_label' => 'regPlate',
                         'label' => 'Wybierz motocykl',
@@ -128,12 +130,12 @@
 
             $form = $this->createFormBuilder($serviceOrder)
                     ->add('mileage', null, array('attr' => array('class' => 'form-control')))
-                    ->add('manager', ChoiceType::class, array('choices_as_values' => true,
+                    ->add('managerId', ChoiceType::class, array('choices_as_values' => true,
                         'choice_label' => 'name',
                         'label' => 'Wybierz Managera',
                         'choices' => $managers,
                         'attr' => array('class' => 'form-control')))
-                    ->add('mechanic', ChoiceType::class, array('choices_as_values' => true,
+                    ->add('mechanicId', ChoiceType::class, array('choices_as_values' => true,
                         'choice_label' => 'name',
                         'label' => 'Wybierz Mechanika',
                         'choices' => $mechanics,
@@ -166,7 +168,7 @@
                         ), 'attr' => array('class' => 'form-control'),
                         'minutes' => range(0, 45, 15)
                     ))
-                    ->add('orderStatus', ChoiceType::class, array('choices_as_values' => true,
+                    ->add('orderStatusId', ChoiceType::class, array('choices_as_values' => true,
                         'choice_label' => 'name',
                         'label' => 'Wybierz status',
                         'choices' => $statuses,
@@ -234,20 +236,20 @@
             $serviceOrder = $repository->findOneById($orderId);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
-            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
-            $serviceOrder->setOrderStatus($orderStatus);
+            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatusId()->getId());
+            $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
             $motorcycle = $repository->findOneById($motorcycleId);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Action');
-            $serviceActions = $repository->findByServiceOrder($orderId);
+            $serviceActions = $repository->findByServiceOrderId($orderId);
             $em = $this->getDoctrine()->getManager();
             $actionsSum = $em->getRepository('ServiceBundle:Action')->getActionsTotal($serviceActions);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Part');
-            $serviceParts = $repository->findByServiceOrder($orderId);
+            $serviceParts = $repository->findByServiceOrderId($orderId);
             $em = $this->getDoctrine()->getManager();
             $partsSum = $em->getRepository('ServiceBundle:Part')->getPartsTotal($serviceParts);
 
@@ -354,7 +356,7 @@
             $allOrders = $query->getResult();
             $orders = [];
             foreach ($allOrders as $order) {
-                $orderName = $order->getOrderStatus()->getName();
+                $orderName = $order->Id()->getName();
                 $order->setOrderStatus($orderName);
                 $orders[] = $order;
             }
@@ -375,7 +377,7 @@
             $allOrders = $query->getResult();
             $orders = [];
             foreach ($allOrders as $order) {
-                $orderName = $order->getOrderStatus()->getName();
+                $orderName = $order->getOrderStatusId()->getName();
                 $order->setOrderStatus($orderName);
                 $orders[] = $order;
             }
@@ -401,11 +403,11 @@
             $motorcycle = $repository->findOneById($motorcycleId);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Action');
-            $serviceActions = $repository->findByServiceOrder($orderId);
+            $serviceActions = $repository->findByServiceOrderId($orderId);
             $actionsSum = $this->getActionTotal($serviceActions);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Part');
-            $serviceParts = $repository->findByServiceOrder($orderId);
+            $serviceParts = $repository->findByServiceOrderId($orderId);
             $partsSum = $this->getPartsTotal($serviceParts);
 
             $form = $this->createFormBuilder($serviceOrder)

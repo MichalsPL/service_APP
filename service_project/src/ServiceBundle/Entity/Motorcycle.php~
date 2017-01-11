@@ -29,9 +29,9 @@ class Motorcycle
      * 
      * 
      * @ORM\ManyToOne(targetEntity="Customer", inversedBy="motorcycles")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="customerId", referencedColumnName="id")
      */
-    private $customer_id;
+    private $customerId;
     
 
 
@@ -326,29 +326,6 @@ class Motorcycle
     }
 
     /**
-     * Set userId
-     *
-     * @param integer $userId
-     * @return Motorcycle
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return integer 
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
      * Add serviceOrder
      *
      * @param \ServiceBundle\Entity\ServiceOrder $serviceOrder
@@ -382,25 +359,25 @@ class Motorcycle
     }
 
     /**
-     * Set customer_id
+     * Set customerId
      *
      * @param \ServiceBundle\Entity\Customer $customerId
      * @return Motorcycle
      */
     public function setCustomerId(\ServiceBundle\Entity\Customer $customerId = null)
     {
-        $this->customer_id = $customerId;
+        $this->customerId = $customerId;
 
         return $this;
     }
 
     /**
-     * Get customer_id
+     * Get customerid
      *
      * @return \ServiceBundle\Entity\Customer 
      */
     public function getCustomerId()
     {
-        return $this->customer_id;
+        return $this->customerId;
     }
 }

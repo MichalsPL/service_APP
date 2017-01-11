@@ -53,13 +53,13 @@ class Employee extends User
         
          /**
          * 
-         * @ORM\OneToMany(targetEntity="ServiceOrder", mappedBy="mechanic_id")
+         * @ORM\OneToMany(targetEntity="ServiceOrder", mappedBy="mechanicId")
          */
         private $mechanicMotorcycles;
         
         /**
          * 
-         * @ORM\OneToMany(targetEntity="ServiceOrder", mappedBy="manager_id")
+         * @ORM\OneToMany(targetEntity="ServiceOrder", mappedBy="managerId")
          */
         private $managerMotorcycles;
 

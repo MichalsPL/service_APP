@@ -11,12 +11,25 @@
      * @Route("/user")
      */
     class UserController extends Controller {
+        
+                 private function getMotorcycleOrders($motorcycle) {
+
+            $orders = [];
+            $motorcycleId = $motorcycle->getId();
+            $motorcycleOrders = $this->getDoctrine()
+                    ->getRepository('ServiceBundle:ServiceOrder')
+                    ->findByMotorcycle($motorcycleId);  
+            foreach ($motorcycleOrders as $order) {
+                $orders[] = $order;
+            }
+            return $orders;
+        }
 
         private function getUserMotorcycles() {
             $userId = $this->container->get('security.context')->getToken()->getUser()->getId();
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
-            $motorcycles = $repository->findByUserId($userId);
+            $motorcycles = $repository->findByCustomer_id($userId);
 
             return $motorcycles;
         }
@@ -60,11 +73,10 @@
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
             $motorcycle = $repository->findOneById($id);
 
-            $em = $this->getDoctrine()->getManager();
-            $orders = $em->getRepository('ServiceBundle:Motorycle')
-                    ->getMotorcycleOrders($motorcycle);
+            
+                  $orders=$this->getMotorcycleOrders($motorcycle);
 
-            if ($motorcycle->getUserId()->getId() == $userId) {
+            if ($motorcycle->getCustomerId()->getId() == $userId) {
 
                 return $this->render('ServiceBundle:User:show_motorcycle.html.twig', array(
                             'motorcycle' => $motorcycle,
@@ -87,12 +99,12 @@
             $serviceOrder = $repository->findOneById($orderId);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Action');
-            $serviceActions = $repository->findByServiceOrder($orderId);
+            $serviceActions = $repository->findByServiceOrder_id($orderId);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Part');
-            $serviceParts = $repository->findByServiceOrder($orderId);
+            $serviceParts = $repository->findByServiceOrder_id($orderId);
 
-            if ($order->getMotorcycle()->getUserId()->getId() == $userId) {
+            if ($order->getMotorcycle()->getCustomerId()->getId() == $userId) {
 
                 return $this->render('ServiceBundle:User:show_order.html.twig', array(
                             'order' => $serviceOrder,

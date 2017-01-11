@@ -48,7 +48,7 @@
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
             $serviceOrder = $repository->findOneById($orderId);
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Action');
-            $actions = $repository->findByServiceOrder($serviceOrder);
+            $actions = $repository->findByServiceOrderId($serviceOrder);
 
             $serviceAction = new Action;
             $form = $this->createActionForm($serviceAction);

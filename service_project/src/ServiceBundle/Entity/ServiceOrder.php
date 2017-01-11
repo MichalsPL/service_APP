@@ -39,7 +39,7 @@ class ServiceOrder
      * 
      */
      
-    private $mechanic_id;
+    private $mechanicId;
     
        /** 
      * 
@@ -49,7 +49,7 @@ class ServiceOrder
      * 
      */
      
-    private $manager_id;
+    private $managerId;
 
   
 
@@ -82,12 +82,12 @@ class ServiceOrder
     private $dateOfRelase;
 
     /**
-     * @ORM\OneToMany(targetEntity="Action", mappedBy="serviceOrder_id")
+     * @ORM\OneToMany(targetEntity="Action", mappedBy="serviceOrderId")
      */
-    private $serviceActions_id;
+    private $serviceActions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Part", mappedBy="serviceOrder")
+     * @ORM\OneToMany(targetEntity="Part", mappedBy="serviceOrderId")
      */
     private $usedParts;
     
@@ -124,9 +124,9 @@ class ServiceOrder
 
     /**
      * @ORM\ManyToOne(targetEntity="OrderStatus", inversedBy="orders")
-     * @ORM\JoinColumn(name="orderStatus_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="orderStatusId", referencedColumnName="id")
      */
-    private $orderStatus_id;
+    private $orderStatusId;
 
 
     function __construct() {
@@ -138,6 +138,8 @@ class ServiceOrder
         $this->dateOfRelase = new \DateTime();
     }
 
+
+
     /**
      * Get id
      *
@@ -146,75 +148,6 @@ class ServiceOrder
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set motorcycle
-     *
-     * @param integer $motorcycle
-     * @return ServiceOrder
-     */
-    public function setMotorcycle($motorcycle)
-    {
-        $this->motorcycle = $motorcycle;
-
-        return $this;
-    }
-
-    /**
-     * Get motorcycle
-     *
-     * @return integer 
-     */
-    public function getMotorcycle()
-    {
-        return $this->motorcycle;
-    }
-
-    /**
-     * Set mechanic
-     *
-     * @param integer $mechanic
-     * @return ServiceOrder
-     */
-    public function setMechanic($mechanic)
-    {
-        $this->mechanic = $mechanic;
-
-        return $this;
-    }
-
-    /**
-     * Get mechanic
-     *
-     * @return integer 
-     */
-    public function getMechanic()
-    {
-        return $this->mechanic;
-    }
-
-    /**
-     * Set manager
-     *
-     * @param integer $manager
-     * @return ServiceOrder
-     */
-    public function setManager($manager)
-    {
-        $this->manager = $manager;
-
-        return $this;
-    }
-
-    /**
-     * Get manager
-     *
-     * @return integer 
-     */
-    public function getManager()
-    {
-        return $this->manager;
     }
 
     /**
@@ -310,49 +243,26 @@ class ServiceOrder
     }
 
     /**
-     * Set serviceActions
+     * Set mileage
      *
-     * @param integer $serviceActions
+     * @param integer $mileage
      * @return ServiceOrder
      */
-    public function setServiceActions($serviceActions)
+    public function setMileage($mileage)
     {
-        $this->serviceActions = $serviceActions;
+        $this->mileage = $mileage;
 
         return $this;
     }
 
     /**
-     * Get serviceActions
+     * Get mileage
      *
      * @return integer 
      */
-    public function getServiceActions()
+    public function getMileage()
     {
-        return $this->serviceActions;
-    }
-
-    /**
-     * Set usedParts
-     *
-     * @param integer $usedParts
-     * @return ServiceOrder
-     */
-    public function setUsedParts($usedParts)
-    {
-        $this->usedParts = $usedParts;
-
-        return $this;
-    }
-
-    /**
-     * Get usedParts
-     *
-     * @return integer 
-     */
-    public function getUsedParts()
-    {
-        return $this->usedParts;
+        return $this->mileage;
     }
 
     /**
@@ -425,26 +335,72 @@ class ServiceOrder
     }
 
     /**
-     * Set orderStatus
+     * Set motorcycle
      *
-     * @param integer $orderStatus
+     * @param \ServiceBundle\Entity\Motorcycle $motorcycle
      * @return ServiceOrder
      */
-    public function setOrderStatus($orderStatus)
+    public function setMotorcycle(\ServiceBundle\Entity\Motorcycle $motorcycle = null)
     {
-        $this->orderStatus = $orderStatus;
+        $this->motorcycle = $motorcycle;
 
         return $this;
     }
 
     /**
-     * Get orderStatus
+     * Get motorcycle
      *
-     * @return integer 
+     * @return \ServiceBundle\Entity\Motorcycle 
      */
-    public function getOrderStatus()
+    public function getMotorcycle()
     {
-        return $this->orderStatus;
+        return $this->motorcycle;
+    }
+
+    /**
+     * Set mechanicId
+     *
+     * @param \ServiceBundle\Entity\Employee $mechanicId
+     * @return ServiceOrder
+     */
+    public function setMechanicId(\ServiceBundle\Entity\Employee $mechanicId = null)
+    {
+        $this->mechanicId = $mechanicId;
+
+        return $this;
+    }
+
+    /**
+     * Get mechanicId
+     *
+     * @return \ServiceBundle\Entity\Employee 
+     */
+    public function getMechanicId()
+    {
+        return $this->mechanicId;
+    }
+
+    /**
+     * Set managerId
+     *
+     * @param \ServiceBundle\Entity\Employee $managerId
+     * @return ServiceOrder
+     */
+    public function setManagerId(\ServiceBundle\Entity\Employee $managerId = null)
+    {
+        $this->managerId = $managerId;
+
+        return $this;
+    }
+
+    /**
+     * Get managerId
+     *
+     * @return \ServiceBundle\Entity\Employee 
+     */
+    public function getManagerId()
+    {
+        return $this->managerId;
     }
 
     /**
@@ -471,9 +427,19 @@ class ServiceOrder
     }
 
     /**
+     * Get serviceActions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getServiceActions()
+    {
+        return $this->serviceActions;
+    }
+
+    /**
      * Add usedParts
      *
-     * @param \ServiceBundle\Entity\Parts $usedPart
+     * @param \ServiceBundle\Entity\Part $usedParts
      * @return ServiceOrder
      */
     public function addUsedPart(\ServiceBundle\Entity\Part $usedParts)
@@ -486,7 +452,7 @@ class ServiceOrder
     /**
      * Remove usedParts
      *
-     * @param \ServiceBundle\Entity\Parts $usedPart
+     * @param \ServiceBundle\Entity\Part $usedParts
      */
     public function removeUsedPart(\ServiceBundle\Entity\Part $usedParts)
     {
@@ -494,127 +460,35 @@ class ServiceOrder
     }
 
     /**
-     * Set mileage
-     *
-     * @param integer $mileage
-     * @return ServiceOrder
-     */
-    public function setMileage($mileage)
-    {
-        $this->mileage = $mileage;
-
-        return $this;
-    }
-
-    /**
-     * Get mileage
-     *
-     * @return integer 
-     */
-    public function getMileage()
-    {
-        return $this->mileage;
-    }
-
-    /**
-     * Add serviceActions_id
-     *
-     * @param \ServiceBundle\Entity\Action $serviceActionsId
-     * @return ServiceOrder
-     */
-    public function addServiceActionsId(\ServiceBundle\Entity\Action $serviceActionsId)
-    {
-        $this->serviceActions_id[] = $serviceActionsId;
-
-        return $this;
-    }
-
-    /**
-     * Remove serviceActions_id
-     *
-     * @param \ServiceBundle\Entity\Action $serviceActionsId
-     */
-    public function removeServiceActionsId(\ServiceBundle\Entity\Action $serviceActionsId)
-    {
-        $this->serviceActions_id->removeElement($serviceActionsId);
-    }
-
-    /**
-     * Get serviceActions_id
+     * Get usedParts
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getServiceActionsId()
+    public function getUsedParts()
     {
-        return $this->serviceActions_id;
+        return $this->usedParts;
     }
 
     /**
-     * Set mechanic_id
-     *
-     * @param \ServiceBundle\Entity\Employee $mechanicId
-     * @return ServiceOrder
-     */
-    public function setMechanicId(\ServiceBundle\Entity\Employee $mechanicId = null)
-    {
-        $this->mechanic_id = $mechanicId;
-
-        return $this;
-    }
-
-    /**
-     * Get mechanic_id
-     *
-     * @return \ServiceBundle\Entity\Employee 
-     */
-    public function getMechanicId()
-    {
-        return $this->mechanic_id;
-    }
-
-    /**
-     * Set manager_id
-     *
-     * @param \ServiceBundle\Entity\Employee $managerId
-     * @return ServiceOrder
-     */
-    public function setManagerId(\ServiceBundle\Entity\Employee $managerId = null)
-    {
-        $this->manager_id = $managerId;
-
-        return $this;
-    }
-
-    /**
-     * Get manager_id
-     *
-     * @return \ServiceBundle\Entity\Employee 
-     */
-    public function getManagerId()
-    {
-        return $this->manager_id;
-    }
-
-    /**
-     * Set orderStatus_id
+     * Set orderStatusId
      *
      * @param \ServiceBundle\Entity\OrderStatus $orderStatusId
      * @return ServiceOrder
      */
     public function setOrderStatusId(\ServiceBundle\Entity\OrderStatus $orderStatusId = null)
     {
-        $this->orderStatus_id = $orderStatusId;
+        $this->orderStatusId = $orderStatusId;
 
         return $this;
     }
 
     /**
-     * Get orderStatus_id
+     * Get orderStatusId
      *
      * @return \ServiceBundle\Entity\OrderStatus 
      */
     public function getOrderStatusId()
     {
-        return $this->orderStatus_id;
+        return $this->orderStatusId;
     }
 }

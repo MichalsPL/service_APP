@@ -31,9 +31,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>{{order.manager.name}} {{order.manager.surname}}</td>
-                <td>{{order.mechanic.name}} {{order.mechanic.surname}}</td>
+            <tr>{{dump(order)}}
+                {#<td>{{order.manager.name}} {{order.manager.surname}}</td>
+                <td>{{order.mechanic.name}} {{order.mechanic.surname}}</td>#}
             </tr>
         </tbody>
     </table>

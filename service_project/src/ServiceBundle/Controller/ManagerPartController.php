@@ -52,14 +52,14 @@
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:ServiceOrder');
             $serviceOrder = $repository->findOneById($orderId);
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Part');
-            $parts = $repository->findByServiceOrder($serviceOrder);
+            $parts = $repository->findByServiceOrderId($serviceOrder);
 
             $part = new Part;
             $form = $this->createPartForm($part);
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $part = $form->getData();
-                $part->setServiceOrder($serviceOrder);
+                $part->setServiceOrderId($serviceOrder);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($part);
                 $em->flush();
