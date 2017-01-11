@@ -92,7 +92,7 @@
                 $userManager->updateUser($editedCustomer, true);
 
 
-                return $this->render('ServiceBundle:Manager:manager_change_customer_details.html.twig', array(
+                return $this->render('ServiceBundle:Manager:change_customer_details.html.twig', array(
                             'message' => 'zmieniłeś  dane użytkownika',
                             'home' => 'wróć'
                 ));

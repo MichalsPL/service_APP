@@ -29,9 +29,9 @@ class Motorcycle
      * 
      * 
      * @ORM\ManyToOne(targetEntity="Customer", inversedBy="motorcycles")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
-    private $userId;
+    private $customer_id;
     
 
 
@@ -379,5 +379,28 @@ class Motorcycle
     public function getServiceOrder()
     {
         return $this->serviceOrder;
+    }
+
+    /**
+     * Set customer_id
+     *
+     * @param \ServiceBundle\Entity\Customer $customerId
+     * @return Motorcycle
+     */
+    public function setCustomerId(\ServiceBundle\Entity\Customer $customerId = null)
+    {
+        $this->customer_id = $customerId;
+
+        return $this;
+    }
+
+    /**
+     * Get customer_id
+     *
+     * @return \ServiceBundle\Entity\Customer 
+     */
+    public function getCustomerId()
+    {
+        return $this->customer_id;
     }
 }

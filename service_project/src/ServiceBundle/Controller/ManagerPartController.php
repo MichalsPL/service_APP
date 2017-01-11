@@ -13,7 +13,7 @@
      */
     class ManagerPartController extends Controller {
 
-        public function createPartForm($action) {
+        private function createPartForm($action) {
 
             $form = $this->createFormBuilder($action)
                     ->add('name', null, array('attr' => array('class' => 'form-control'),
@@ -36,7 +36,7 @@
             $part = new Part;
             $form = $this->createPartForm($part);
 
-            return $this->render('ServiceBundle:Manager:add_service_part.html.twig', array(
+            return $this->render('ServiceBundle:Manager/Part:add_service_part.html.twig', array(
                         'form' => $form->createView(),
                         'orderId' => $orderId,
             ));
@@ -74,7 +74,7 @@
 
                 $message = "zlecenie  nie zostało dodane";
             }
-            return $this->render('ServiceBundle:Manager:add_service_part.html.twig', array(
+            return $this->render('ServiceBundle:Manager/Part:add_service_part.html.twig', array(
                         'form' => $form->createView(),
                         'message' => $message,
                         'orderId' => $orderId,

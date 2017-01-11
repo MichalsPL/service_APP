@@ -23,10 +23,10 @@ class Action
 
    
    /**
-*@ORM\ManyToOne(targetEntity="ServiceOrder", inversedBy="serviceActions")
+*@ORM\ManyToOne(targetEntity="ServiceOrder", inversedBy="serviceActions_id")
      * @ORM\JoinColumn(name="serviceOrder", referencedColumnName="id")
      */
-    private $serviceOrder;
+    private $serviceOrder_id;
    
     /**
      * @var string
@@ -149,5 +149,28 @@ class Action
     public function getDone()
     {
         return $this->done;
+    }
+
+    /**
+     * Set serviceOrder_id
+     *
+     * @param \ServiceBundle\Entity\ServiceOrder $serviceOrderId
+     * @return Action
+     */
+    public function setServiceOrderId(\ServiceBundle\Entity\ServiceOrder $serviceOrderId = null)
+    {
+        $this->serviceOrder_id = $serviceOrderId;
+
+        return $this;
+    }
+
+    /**
+     * Get serviceOrder_id
+     *
+     * @return \ServiceBundle\Entity\ServiceOrder 
+     */
+    public function getServiceOrderId()
+    {
+        return $this->serviceOrder_id;
     }
 }

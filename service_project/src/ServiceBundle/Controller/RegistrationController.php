@@ -173,12 +173,12 @@
 
             if ($addedUserRolesArray[0] == "ROLE_USER") {
 
-                return $this->render('ServiceBundle:Manager:registration_confirmed.html.twig', array(
+                return $this->render('ServiceBundle:Registration:customer_registration_confirmed.html.twig', array(
                             'user' => $user,
                             'targetUrl' => $addedUserRolesArray[0]
                 ));
             } else {
-                return $this->render('ServiceBundle:Admin:registration_confirmed.html.twig', array(
+                return $this->render('ServiceBundle:Registration:employee_registration_confirmed.html.twig', array(
                             'user' => $user,
                             'targetUrl' => $addedUserRolesArray[0]
                 ));

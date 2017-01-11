@@ -13,7 +13,7 @@
      */
     class ManagerActionController extends Controller {
 
-        public function createActionForm($action) {
+        private function createActionForm($action) {
 
             $form = $this->createFormBuilder($action)
                     ->add('name', null, array('attr' => array('class' => 'form-control')))
@@ -32,7 +32,7 @@
             $serviceAction = new Action;
             $form = $this->createActionForm($serviceAction);
 
-            return $this->render('ServiceBundle:Manager:add_service_action.html.twig', array(
+            return $this->render('ServiceBundle:Manager/Action:add_service_action.html.twig', array(
                         'form' => $form->createView(),
                         'orderId' => $orderId
             ));
@@ -73,7 +73,7 @@
                 $message = "Czynność nie została dodana";
             }
 
-            return $this->render('ServiceBundle:Manager:add_service_action.html.twig', array(
+            return $this->render('ServiceBundle:Manager/Action:add_service_action.html.twig', array(
                         'form' => $form->createView(),
                         'message' => $message,
                         'orderId' => $orderId,
@@ -93,7 +93,7 @@
             $form = $this->createActionForm($serviceAction);
             $actionId = $serviceAction->getServiceOrder()->getId();
 
-            return $this->render('ServiceBundle:Manager:add_service_action.html.twig', array(
+            return $this->render('ServiceBundle:Manager/Action:add_service_action.html.twig', array(
                         'form' => $form->createView(),
                         'actionId' => $actionId,
                         'orderId' => $orderId
@@ -156,7 +156,7 @@
             $form = $this->createPartForm($servicePart);
             $orderId = $servicePart->getServiceOrder()->getId();
 
-            return $this->render('ServiceBundle:Manager:add_service_part.html.twig', array(
+            return $this->render('ServiceBundle:Manager/Action:add_service_part.html.twig', array(
                         'form' => $form->createView(),
                         'partId' => $partId,
                         'orderId' => $orderId

@@ -35,21 +35,21 @@ class ServiceOrder
      * 
      * 
      * @ORM\ManyToOne(targetEntity="Employee", inversedBy="mechanicMotorcycles")
-     * @ORM\JoinColumn(name="mechanic", referencedColumnName="id")
+     * @ORM\JoinColumn(name="mechanic_id", referencedColumnName="id")
      * 
      */
      
-    private $mechanic;
+    private $mechanic_id;
     
        /** 
      * 
      * 
      * @ORM\ManyToOne(targetEntity="Employee", inversedBy="managerMotorcycles")
-     * @ORM\JoinColumn(name="manager", referencedColumnName="id")
+     * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
      * 
      */
      
-    private $manager;
+    private $manager_id;
 
   
 
@@ -82,9 +82,9 @@ class ServiceOrder
     private $dateOfRelase;
 
     /**
-     * @ORM\OneToMany(targetEntity="Action", mappedBy="serviceOrder")
+     * @ORM\OneToMany(targetEntity="Action", mappedBy="serviceOrder_id")
      */
-    private $serviceActions;
+    private $serviceActions_id;
 
     /**
      * @ORM\OneToMany(targetEntity="Part", mappedBy="serviceOrder")
@@ -124,9 +124,9 @@ class ServiceOrder
 
     /**
      * @ORM\ManyToOne(targetEntity="OrderStatus", inversedBy="orders")
-     * @ORM\JoinColumn(name="orderStatus", referencedColumnName="id")
+     * @ORM\JoinColumn(name="orderStatus_id", referencedColumnName="id")
      */
-    private $orderStatus;
+    private $orderStatus_id;
 
 
     function __construct() {
@@ -514,5 +514,107 @@ class ServiceOrder
     public function getMileage()
     {
         return $this->mileage;
+    }
+
+    /**
+     * Add serviceActions_id
+     *
+     * @param \ServiceBundle\Entity\Action $serviceActionsId
+     * @return ServiceOrder
+     */
+    public function addServiceActionsId(\ServiceBundle\Entity\Action $serviceActionsId)
+    {
+        $this->serviceActions_id[] = $serviceActionsId;
+
+        return $this;
+    }
+
+    /**
+     * Remove serviceActions_id
+     *
+     * @param \ServiceBundle\Entity\Action $serviceActionsId
+     */
+    public function removeServiceActionsId(\ServiceBundle\Entity\Action $serviceActionsId)
+    {
+        $this->serviceActions_id->removeElement($serviceActionsId);
+    }
+
+    /**
+     * Get serviceActions_id
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getServiceActionsId()
+    {
+        return $this->serviceActions_id;
+    }
+
+    /**
+     * Set mechanic_id
+     *
+     * @param \ServiceBundle\Entity\Employee $mechanicId
+     * @return ServiceOrder
+     */
+    public function setMechanicId(\ServiceBundle\Entity\Employee $mechanicId = null)
+    {
+        $this->mechanic_id = $mechanicId;
+
+        return $this;
+    }
+
+    /**
+     * Get mechanic_id
+     *
+     * @return \ServiceBundle\Entity\Employee 
+     */
+    public function getMechanicId()
+    {
+        return $this->mechanic_id;
+    }
+
+    /**
+     * Set manager_id
+     *
+     * @param \ServiceBundle\Entity\Employee $managerId
+     * @return ServiceOrder
+     */
+    public function setManagerId(\ServiceBundle\Entity\Employee $managerId = null)
+    {
+        $this->manager_id = $managerId;
+
+        return $this;
+    }
+
+    /**
+     * Get manager_id
+     *
+     * @return \ServiceBundle\Entity\Employee 
+     */
+    public function getManagerId()
+    {
+        return $this->manager_id;
+    }
+
+    /**
+     * Set orderStatus_id
+     *
+     * @param \ServiceBundle\Entity\OrderStatus $orderStatusId
+     * @return ServiceOrder
+     */
+    public function setOrderStatusId(\ServiceBundle\Entity\OrderStatus $orderStatusId = null)
+    {
+        $this->orderStatus_id = $orderStatusId;
+
+        return $this;
+    }
+
+    /**
+     * Get orderStatus_id
+     *
+     * @return \ServiceBundle\Entity\OrderStatus 
+     */
+    public function getOrderStatusId()
+    {
+        return $this->orderStatus_id;
     }
 }

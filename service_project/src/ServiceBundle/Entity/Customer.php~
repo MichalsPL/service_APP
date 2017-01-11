@@ -50,7 +50,7 @@
 
         /**
          * 
-         * @ORM\OneToMany(targetEntity="Motorcycle", mappedBy="userId")
+         * @ORM\OneToMany(targetEntity="Motorcycle", mappedBy="customer_id")
          */
         private $motorcycles;
 

@@ -30,7 +30,7 @@
                         'attr' => array('class' => 'form-control')
                     ))->add('save', 'submit', array('label' => 'zatwierdź'))
                     ->getForm();
-            return $this->render('ServiceBundle:Manager:add_service_order.html.twig', array(
+            return $this->render('ServiceBundle:Manager/ServiceOrder:add_service_order.html.twig', array(
                         'form' => $form->createView(),
                         'type' => 'user'
             ));
@@ -82,7 +82,7 @@
                         'attr' => array('class' => 'form-control')
                     ))->add('save', 'submit', array('label' => 'zatwierdź'))
                     ->getForm();
-            return $this->render('ServiceBundle:Manager:add_service_order.html.twig', array(
+            return $this->render('ServiceBundle:Manager/ServiceOrder:add_service_order.html.twig', array(
                         'form' => $form->createView(),
                         'type' => 'motorcycle',
                         'userId' => $userId
@@ -190,7 +190,7 @@
             $form = $this->createServiceOrderForm($serviceOrder);
 
 
-            return $this->render('ServiceBundle:Manager:add_service_order.html.twig', array(
+            return $this->render('ServiceBundle:Manager/ServiceOrder:add_service_order.html.twig', array(
                         'form' => $form->createView(),
             ));
         }
@@ -257,7 +257,7 @@
                     ->add('save', 'submit', array('label' => 'zatwierdź'))
                     ->getForm();
 
-            return $this->render('ServiceBundle:Manager:service_order_checkout.html.twig', array(
+            return $this->render('ServiceBundle:Manager/ServiceOrder:service_order_checkout.html.twig', array(
                         'order' => $serviceOrder,
                         'motorcycle' => $motorcycle,
                         'actions' => $serviceActions,
@@ -297,7 +297,7 @@
                 $message = "zlecenie  nie zostało dodane";
             }
 
-            return $this->render('ServiceBundle:Manager:service_order_checkout_final.html.twig', array(
+            return $this->render('ServiceBundle:Manager/ServiceOrder:service_order_checkout_final.html.twig', array(
                         'message' => $message
             ));
         }
@@ -313,7 +313,7 @@
             $form = $this->createServiceOrderForm($serviceOrder);
 
 
-            return $this->render('ServiceBundle:Manager:add_service_order.html.twig', array(
+            return $this->render('ServiceBundle:Manager/ServiceOrder:add_service_order.html.twig', array(
                         'form' => $form->createView(),
             ));
         }
@@ -359,7 +359,7 @@
                 $orders[] = $order;
             }
             $message = "widzisz wszystkie zlecenia";
-            return $this->render('ServiceBundle:Manager:show_orders.html.twig', array(
+            return $this->render('ServiceBundle:Manager/ServiceOrder:show_orders.html.twig', array(
                         'orders' => $orders,
                         'message' => $message,
             ));
@@ -380,7 +380,7 @@
                 $orders[] = $order;
             }
 
-            return $this->render('ServiceBundle:Manager:show_orders.html.twig', array(
+            return $this->render('ServiceBundle:Manager/ServiceOrder:show_orders.html.twig', array(
                         'orders' => $orders,
                         'message' => "Widzisz zlecenia o wybranym statusie"
             ));
@@ -414,7 +414,7 @@
                     ->add('save', 'submit', array('label' => 'zatwierdź'))
                     ->getForm();
 
-            return $this->render('ServiceBundle:Manager:service_order_checkout.html.twig', array(
+            return $this->render('ServiceBundle:Manager/ServiceOrder:service_order_checkout.html.twig', array(
                         'order' => $serviceOrder,
                         'motorcycle' => $motorcycle,
                         'actions' => $serviceActions,
@@ -454,7 +454,7 @@
                 $message = "zlecenie  nie zostało dodane";
             }
 
-            return $this->render('ServiceBundle:Manager:service_order_checkout_final.html.twig', array(
+            return $this->render('ServiceBundle/ServiceOrder:Manager:service_order_checkout_final.html.twig', array(
                         'message' => $message
             ));
         }

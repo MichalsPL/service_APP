@@ -4,7 +4,6 @@
 
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-    use ServiceBundle\Entity\User;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
     use Symfony\Component\HttpFoundation\Request;
 
