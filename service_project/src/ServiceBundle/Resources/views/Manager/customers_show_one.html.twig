@@ -94,7 +94,7 @@
                                 {% else%}
                                     odd gradeX 
                                 {%endif%}
-                                " name="click" data-href="{{ path('userShowOrder', { 'orderId': order.id }) }}">
+                                " name="click" data-href="{{ path('manager_show_one_order', { 'orderId': order.id }) }}">
                                 <td>{{order.motorcycle.make}}</td>
                                 <td>{{order.motorcycle.model}}</td>
                                 <td>{{order.motorcycle.regPlate}}</td>

@@ -124,7 +124,7 @@
 
         private function createServiceOrderForm($serviceOrder) {
             $em = $this->getDoctrine()->getManager();
-            $statuses = $em->getRepository('ServiceBundle:OrderStatus')->chooseStatusForAddOrder();       
+            $statuses = $em->getRepository('ServiceBundle:OrderStatus')->chooseStatusForAddOrder();
             $mechanics = $em->getRepository('ServiceBundle:Employee')->getActiveMechanic();
             $managers = $em->getRepository('ServiceBundle:Employee')->getActiveManager();
 
@@ -404,11 +404,12 @@
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Action');
             $serviceActions = $repository->findByServiceOrderId($orderId);
-            $actionsSum = $this->getActionTotal($serviceActions);
-
+            $em = $this->getDoctrine()->getManager();
+            $actionsSum = $em->getRepository('ServiceBundle:Action')
+                    ->getActionsTotal($serviceActions);
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Part');
             $serviceParts = $repository->findByServiceOrderId($orderId);
-            $partsSum = $this->getPartsTotal($serviceParts);
+            $partsSum = $repository->getPartsTotal($serviceParts);
 
             $form = $this->createFormBuilder($serviceOrder)
                     ->add('userComments', null, array('attr' => array('class' => 'form-control')))
@@ -429,7 +430,7 @@
         }
 
         /**
-         * @Route("/showOneOrder/{orderId}", name="manager_show_one_order")
+         * @Route("/showOneOrder/{orderId}")
          * @Method({"POST"})
          * 
          */
@@ -456,7 +457,7 @@
                 $message = "zlecenie  nie zostało dodane";
             }
 
-            return $this->render('ServiceBundle/ServiceOrder:Manager:service_order_checkout_final.html.twig', array(
+            return $this->render('ServiceBundle:Manager/ServiceOrder:service_order_checkout_final.html.twig', array(
                         'message' => $message
             ));
         }
