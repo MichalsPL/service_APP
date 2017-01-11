@@ -11,14 +11,14 @@
      * @Route("/user")
      */
     class UserController extends Controller {
-        
-                 private function getMotorcycleOrders($motorcycle) {
+
+        private function getMotorcycleOrders($motorcycle) {
 
             $orders = [];
             $motorcycleId = $motorcycle->getId();
             $motorcycleOrders = $this->getDoctrine()
                     ->getRepository('ServiceBundle:ServiceOrder')
-                    ->findByMotorcycle($motorcycleId);  
+                    ->findByMotorcycle($motorcycleId);
             foreach ($motorcycleOrders as $order) {
                 $orders[] = $order;
             }
@@ -73,8 +73,8 @@
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:Motorcycle');
             $motorcycle = $repository->findOneById($id);
 
-            
-                  $orders=$this->getMotorcycleOrders($motorcycle);
+
+            $orders = $this->getMotorcycleOrders($motorcycle);
 
             if ($motorcycle->getCustomerId()->getId() == $userId) {
 
@@ -176,7 +176,6 @@
                 ));
             } else {
                 // co jak błąd 
-                
             }
         }
 

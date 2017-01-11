@@ -1,16 +1,16 @@
 <?php
 
-namespace ServiceBundle\Controller;
+    namespace ServiceBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
     /**
      * @Route("/mechanic")
      */
-class MechanicController extends Controller
-{
-     /**
+    class MechanicController extends Controller {
+
+        /**
          * @Route("/", name="mechanic_index")
          */
         public function managerIndexAction() {
@@ -18,4 +18,6 @@ class MechanicController extends Controller
                             // ...
             ));
         }
-}
+
+    }
+    

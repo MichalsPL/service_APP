@@ -1,13 +1,14 @@
 <?php
 
-namespace ServiceBundle\Controller;
+    namespace ServiceBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
     /**
      * @Route("/mechanic")
      */
-class MechanicMotorcycleController extends Controller
-{
-}
+    class MechanicMotorcycleController extends Controller {
+        
+    }
+    

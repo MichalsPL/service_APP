@@ -5,86 +5,86 @@
 
         {% if user_motorcycles is defined%}
             {%if user_motorcycles|length >0 %}
-            <h4>Twoje Motocykl</h4>
-            <h6>kliknij w motocykl żeby zobaczyć zlecenia serwisowe</h6>
-            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                <thead>
-                    <tr>
-                        <th>Marka</th>
-                        <th>Model</th>
-                        <th>Rok produkcji </th>
-                        <th>NrRej</th>
-                        <th>przebieg</th>
-                    </tr>
-                </thead>
-                <tbody>   
-                    {% for motorcycle in user_motorcycles%}
-                        {% set counter = ( counter | default(0) ) + 1 %}
-                     <a href="{{ path('userShowMotorcycle', { 'id': motorcycle.id }) }}">
-                        <tr class="
-                            {% if  counter % 2 == 0%}
-                                even gradeC
-                            {% else%}
-                                odd gradeX 
-                            {%endif%}
-                            " name="click" data-href="{{ path('userShowMotorcycle', { 'id': motorcycle.id }) }}">
-                               
-                            <td>{{motorcycle.make}}</td>
-                            <td>{{motorcycle.model}}</td>
-                            <td>{{motorcycle.year}}</td>
-                            <td>{{motorcycle.regPlate}}</td>
-                            <td>{{motorcycle.mileage}}</td>
-                             </a>
+                <h4>Twoje Motocykl</h4>
+                <h6>kliknij w motocykl żeby zobaczyć zlecenia serwisowe</h6>
+                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>Marka</th>
+                            <th>Model</th>
+                            <th>Rok produkcji </th>
+                            <th>NrRej</th>
+                            <th>przebieg</th>
                         </tr>
-                       
+                    </thead>
+                    <tbody>   
+                        {% for motorcycle in user_motorcycles%}
+                            {% set counter = ( counter | default(0) ) + 1 %}
+                        <a href="{{ path('userShowMotorcycle', { 'id': motorcycle.id }) }}">
+                            <tr class="
+                                {% if  counter % 2 == 0%}
+                                    even gradeC
+                                {% else%}
+                                    odd gradeX 
+                                {%endif%}
+                                " name="click" data-href="{{ path('userShowMotorcycle', { 'id': motorcycle.id }) }}">
+
+                                <td>{{motorcycle.make}}</td>
+                                <td>{{motorcycle.model}}</td>
+                                <td>{{motorcycle.year}}</td>
+                                <td>{{motorcycle.regPlate}}</td>
+                                <td>{{motorcycle.mileage}}</td>
+                        </a>
+                        </tr>
+
                     {%endfor%}
-                </tbody>
-            </table>
-                {%else%}
-                 <h4>Nie Masz aktualnie żadnych Motocykli</h4>
-                 {%endif%}
+                    </tbody>
+                </table>
+            {%else%}
+                <h4>Nie Masz aktualnie żadnych Motocykli</h4>
+            {%endif%}
         {%endif%}
 
         {% if user_orders is defined %}
             {%if user_orders|length >0 %}
-            <h4>Widzisz wszystkie Twoje zlecenia</h4>
-            <h6> klikinj w zecenie żeby zobaczyć szczegóły</h6>
-            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                <thead>
-                    <tr>
-                        <th>Marka</th>
-                        <th>Model</th>
-                        <th>NrRej</th>
-                        <th>przebieg</th>
-                        <th>data rozpoczęcia</th>
-                        <th>data zakończenia</th>
-                        <th>mój komentarz</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for order in user_orders%}
-                        {% set counter = ( counter | default(0) ) + 1 %}
-                        <tr class="
-                            {% if  counter % 2 == 0%}
-                                even gradeC
-                            {% else%}
-                                odd gradeX 
-                            {%endif%}
-                            " name="click" data-href="{{ path('userShowOrder', { 'orderId': order.id }) }}">
-                            <td>{{order.motorcycle.make}}</td>
-                            <td>{{order.motorcycle.model}}</td>
-                            <td>{{order.motorcycle.regPlate}}</td>
-                            <td>{{order.motorcycle.mileage}} </td>
-                            <td>{{order.startDate.date}}</td>
-                            <td>{{order.endDate.date}}</td>
-                            <td>{{order.userComments}}</td>
+                <h4>Widzisz wszystkie Twoje zlecenia</h4>
+                <h6> klikinj w zecenie żeby zobaczyć szczegóły</h6>
+                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>Marka</th>
+                            <th>Model</th>
+                            <th>NrRej</th>
+                            <th>przebieg</th>
+                            <th>data rozpoczęcia</th>
+                            <th>data zakończenia</th>
+                            <th>mój komentarz</th>
                         </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-                 {%else%}
-                 <h4>Nie Masz aktualnie żadnych Zleceń</h4>
-                 {%endif%}
+                    </thead>
+                    <tbody>
+                        {% for order in user_orders%}
+                            {% set counter = ( counter | default(0) ) + 1 %}
+                            <tr class="
+                                {% if  counter % 2 == 0%}
+                                    even gradeC
+                                {% else%}
+                                    odd gradeX 
+                                {%endif%}
+                                " name="click" data-href="{{ path('userShowOrder', { 'orderId': order.id }) }}">
+                                <td>{{order.motorcycle.make}}</td>
+                                <td>{{order.motorcycle.model}}</td>
+                                <td>{{order.motorcycle.regPlate}}</td>
+                                <td>{{order.motorcycle.mileage}} </td>
+                                <td>{{order.startDate.date}}</td>
+                                <td>{{order.endDate.date}}</td>
+                                <td>{{order.userComments}}</td>
+                            </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            {%else%}
+                <h4>Nie Masz aktualnie żadnych Zleceń</h4>
+            {%endif%}
         {%endif%}         
     </div>
 {% endblock %}

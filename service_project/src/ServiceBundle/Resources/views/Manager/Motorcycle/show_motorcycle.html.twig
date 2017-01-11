@@ -49,44 +49,44 @@
 
     {% if orders is defined %}
         {%if orders|length >0 %}
-        <h4>Widzisz wszystkie zlecenia motocykla</h4>
-        <h6> klikinj w zecenie żeby zobaczyć szczegóły</h6>
-        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-            <thead>
-                <tr>
-                    <th>Marka</th>
-                    <th>Model</th>
-                    <th>NrRej</th>
-                    <th>przebieg</th>
-                    <th>data rozpoczęcia</th>
-                    <th>data zakończenia</th>
-                    <th>komentarz managera</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for order in orders%}
-                    {% set counter = ( counter | default(0) ) + 1 %}
-                    <tr class="
-                        {% if  counter % 2 == 0%}
-                            even gradeC
-                        {% else%}
-                            odd gradeX 
-                        {%endif%}
-                        " name="click" data-href="{{ path('manager_order_checkout', { 'orderId': order.id }) }}">
-                        <td>{{order.motorcycle.make}}</td>
-                        <td>{{order.motorcycle.model}}</td>
-                        <td>{{order.motorcycle.regPlate}}</td>
-                        <td>do poprawy </td>
-                        <td>{{order.startDate.date}}</td>
-                        <td>{{order.endDate.date}}</td>
-                        <td>{{order.managerComments}}</td>
+            <h4>Widzisz wszystkie zlecenia motocykla</h4>
+            <h6> klikinj w zecenie żeby zobaczyć szczegóły</h6>
+            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Marka</th>
+                        <th>Model</th>
+                        <th>NrRej</th>
+                        <th>przebieg</th>
+                        <th>data rozpoczęcia</th>
+                        <th>data zakończenia</th>
+                        <th>komentarz managera</th>
                     </tr>
-                {%endfor%}
-            </tbody>
-        </table>
-            {%else%}
-                <h4> Motocykl nie ma żadnych zleceń</h4>
-                {%endif%}
+                </thead>
+                <tbody>
+                    {% for order in orders%}
+                        {% set counter = ( counter | default(0) ) + 1 %}
+                        <tr class="
+                            {% if  counter % 2 == 0%}
+                                even gradeC
+                            {% else%}
+                                odd gradeX 
+                            {%endif%}
+                            " name="click" data-href="{{ path('manager_order_checkout', { 'orderId': order.id }) }}">
+                            <td>{{order.motorcycle.make}}</td>
+                            <td>{{order.motorcycle.model}}</td>
+                            <td>{{order.motorcycle.regPlate}}</td>
+                            <td>do poprawy </td>
+                            <td>{{order.startDate.date}}</td>
+                            <td>{{order.endDate.date}}</td>
+                            <td>{{order.managerComments}}</td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        {%else%}
+            <h4> Motocykl nie ma żadnych zleceń</h4>
+        {%endif%}
     {%endif%}    
 
 {% endblock %}

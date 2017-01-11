@@ -13,11 +13,11 @@
                 {{ form_widget(form) }}
                 {{ form_end(form) }}
             {%endif%}
-            
-               {%if customer is defined%}
-               {{dump(customer)}}
+
+            {%if customer is defined%}
+                {{dump(customer)}}
             {%endif%}
-           
+
         </div>
 
     {% endblock %}

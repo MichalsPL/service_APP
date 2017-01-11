@@ -11,6 +11,6 @@
      * repository methods below.
      */
     class ServiceOrderRepository extends EntityRepository {
-
+        
     }
     

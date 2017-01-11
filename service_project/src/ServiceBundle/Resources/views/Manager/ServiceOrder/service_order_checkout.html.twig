@@ -5,7 +5,7 @@
     <h4>status zlecenia: {{order.orderStatusId.name}}</h4>
     {%if order.orderStatusId.id == 1%}
         jak planowane
-      <a href="{{ path('manager_order_accept',  { 'orderId': order.id }) }}">Edytuj Użytkownika</a>
+        <a href="{{ path('manager_order_accept',  { 'orderId': order.id }) }}">Edytuj Użytkownika</a>
         manager_order_accept
         otwórz
         anuluj

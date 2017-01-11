@@ -54,7 +54,7 @@
                     ->setParameter('role', '%ROLE_MECHANIC%')
                     ->getQuery()
                     ->getResult();
-            
+
             return $mechanics;
         }
 

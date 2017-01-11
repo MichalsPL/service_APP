@@ -117,14 +117,12 @@
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($serviceAction);
                 $em->flush();
- return $this->redirectToRoute('order_checkout', array(
-                        'orderId' => $serviceAction->getServiceOrder()->getId()
-            ));
-
+                return $this->redirectToRoute('order_checkout', array(
+                            'orderId' => $serviceAction->getServiceOrder()->getId()
+                ));
             } else {
 // co jak błąd
             }
-           
         }
 
         /**
@@ -181,13 +179,12 @@
                 $em->persist($servicePart);
                 $em->flush();
 
-     return $this->redirectToRoute('order_checkout', array(
-                        'orderId' => $servicePart->getServiceOrder()->getId()
-            ));
+                return $this->redirectToRoute('order_checkout', array(
+                            'orderId' => $servicePart->getServiceOrder()->getId()
+                ));
             } else {
 // co jak błąd
             }
-       
         }
 
         /**
