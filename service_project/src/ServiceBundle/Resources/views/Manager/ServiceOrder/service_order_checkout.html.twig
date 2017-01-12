@@ -4,21 +4,23 @@
     <h1> Widzisz podsumowanie zlecenia</h1>
     <h4>status zlecenia: {{order.orderStatusId.name}}</h4>
     {%if order.orderStatusId.id == 1%}
-        jak planowane
-        <a href="{{ path('manager_order_accept',  { 'orderId': order.id }) }}">Edytuj Użytkownika</a>
-        manager_order_accept
-        otwórz
-        anuluj
+
+        <a href="{{ path('manager_order_accept',  { 'orderId': order.id }) }}">Przyjmij motocykl</a>
+        <a href="{{ path('manager_order_cancell',  { 'orderId': order.id }) }}">anuluj zlecenie</a>
+
     {%elseif order.orderStatusId.id == 2%}
         jak przyjęte 
         otwórz 
-        anuluj
+        <a href="{{ path('manager_order_open',  { 'orderId': order.id }) }}">Otwórz zlecenie</a>
+        <a href="{{ path('manager_order_cancell',  { 'orderId': order.id }) }}">anuluj zlecenie</a>
+
     {%elseif order.orderStatusId.id == 3%}
-        jak otwarte
-        oczekujące
-        gotowe
-        do odbioru 
-        anuluj
+
+        <a href="{{ path('manager_order_waiting',  { 'orderId': order.id }) }}">oznacz jako oczekujące</a>
+        <a href="{{ path('manager_order_ready',  { 'orderId': order.id }) }}">oznacz jako gotowe</a>
+        <a href="{{ path('manager_order_cancell',  { 'orderId': order.id }) }}">anuluj zlecenie</a>
+        <a href="{{ path('manager_order_ready_collect',  { 'orderId': order.id }) }}">zlecenie do odbioru</a>
+
     {%elseif order.orderStatusId.id == 4%}
         jak jak oczekujące
         zaplanuj (postępowanie no właśnie jakie)
@@ -26,10 +28,12 @@
     {%elseif order.orderStatusId.id == 5%}
 
         jak gotowe
-        do odbioru 
-    {%elseif order.orderStatus.id == 6%}
+        <a href="{{ path('manager_order_ready_collect',  { 'orderId': order.id }) }}">doOdbioru zlecenie</a>
+
+    {%elseif order.orderStatusId.id == 6%}
         jak do odbioru 
-        zakończ
+        <a href="{{ path('manager_order_end',  { 'orderId': order.id }) }}">zakończ zlecenie</a>
+
     {%else%}
 
     {%endif%}
@@ -189,9 +193,10 @@
     {%endif%}
     <h4> przewidywane kwota do zapłaty {{finalPrice}}</h4>
 
-
+{%if form is defined%}
     jeśli chcesz dodaj komentarze
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
+    {%endif%}
 {% endblock %}

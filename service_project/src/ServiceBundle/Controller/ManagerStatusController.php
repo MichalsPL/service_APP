@@ -99,7 +99,7 @@
             $serviceOrder = $repository->findOneById($orderId);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
-            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
+            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatusId()->getId());
             $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
@@ -169,7 +169,7 @@
             $serviceOrder = $repository->findOneById($orderId);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
-            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
+            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatusId()->getId());
             $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
@@ -237,7 +237,7 @@
             $serviceOrder = $repository->findOneById($orderId);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
-            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
+            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatusId()->getId());
             $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
@@ -245,12 +245,12 @@
             $motorcycle = $repository->findOneById($motorcycleId);
 
             $form = $this->createFormBuilder($serviceOrder)
-                    ->add('userComments', null, array('attr' => array('class' => 'form-control')))
+                    ->add('mechanicComments', null, array('attr' => array('class' => 'form-control')))
                     ->add('managerComments', null, array('attr' => array('class' => 'form-control')))
                     ->add('save', 'submit', array('label' => 'zatwierdź'))
                     ->getForm();
 
-            return $this->render('ServiceBundle:Manager/OrderStstus:service_order_change_status_accept.html.twig', array(
+            return $this->render('ServiceBundle:Manager/OrderStatus:service_order_change_status_accept.html.twig', array(
                         'order' => $serviceOrder,
                         'motorcycle' => $motorcycle,
                         'form' => $form->createView()
@@ -305,7 +305,7 @@
             $serviceOrder = $repository->findOneById($orderId);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
-            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
+            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatusId()->getId());
             $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
@@ -313,7 +313,7 @@
             $motorcycle = $repository->findOneById($motorcycleId);
 
             $form = $this->createFormBuilder($serviceOrder)
-                    ->add('userComments', null, array('attr' => array('class' => 'form-control')))
+                    ->add('mechanicComments', null, array('attr' => array('class' => 'form-control')))
                     ->add('managerComments', null, array('attr' => array('class' => 'form-control')))
                     ->add('save', 'submit', array('label' => 'zatwierdź'))
                     ->getForm();
@@ -373,7 +373,7 @@
             $serviceOrder = $repository->findOneById($orderId);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
-            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
+            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatusId()->getId());
             $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
@@ -381,8 +381,6 @@
             $motorcycle = $repository->findOneById($motorcycleId);
 
             $form = $this->createFormBuilder($serviceOrder)
-                    ->add('userComments', null, array('attr' => array('class' => 'form-control')))
-                    ->add('managerComments', null, array('attr' => array('class' => 'form-control')))
                     ->add('save', 'submit', array('label' => 'zatwierdź'))
                     ->getForm();
 
@@ -409,15 +407,14 @@
             $motorcycle = $repository->findOneById($motorcycleId);
 
             $form = $this->createFormBuilder($serviceOrder)
-                    ->add('mechanicComments', null, array('attr' => array('class' => 'form-control')))
-                    ->add('managerComments', null, array('attr' => array('class' => 'form-control')))
+
                     ->add('save', 'submit', array('label' => 'zatwierdź'))
                     ->getForm();
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $serviceOrder = $form->getData();
                 $serviceOrder->setOrderStatusId($orderStatus);
-                $serviceOrder->setStartDate(new DateTime());
+                $serviceOrder->setEndDate(new DateTime());
                 $motorcycle->setMileage($serviceOrder->getMileage());
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($serviceOrder);
@@ -441,7 +438,7 @@
             $serviceOrder = $repository->findOneById($orderId);
 
             $repository = $this->getDoctrine()->getRepository('ServiceBundle:OrderStatus');
-            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatus()->getId());
+            $orderStatus = $repository->findOneById($serviceOrder->getOrderStatusId()->getId());
             $serviceOrder->setOrderStatusId($orderStatus);
 
             $motorcycleId = $serviceOrder->getMotorcycle()->getId();
