@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 09 Sty 2017, 10:05
+-- Czas generowania: 16 Sty 2017, 09:10
 -- Wersja serwera: 5.7.16-0ubuntu0.16.04.1
 -- Wersja PHP: 7.0.8-0ubuntu0.16.04.3
 
@@ -39,7 +39,13 @@ CREATE TABLE `actions` (
 --
 
 INSERT INTO `actions` (`id`, `name`, `price`, `done`, `serviceOrder`) VALUES
-(2, 'bbb', 18.78, NULL, 2);
+(2, 'bbb', 18.78, NULL, 2),
+(3, 'jakaś czynność', 100, NULL, 3),
+(4, 'jakaś czynność', 15, NULL, 4),
+(5, 'jakaś czynność 2', 27, NULL, 4),
+(6, 'aaa', 12, NULL, 5),
+(7, 'feas', 4, NULL, 5),
+(9, 'aaa', 12, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -126,9 +132,9 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `type`) VALUES
-(6, 'user', 'user', 'user@user.pl', 'user@user.pl', 1, NULL, '$2y$13$Kc1YBhXzyH/bLWnVCdv/ueJJfDQ3pfbPe5ww2f8WYR/dXIs7x8irK', '2017-01-08 09:13:21', NULL, NULL, 'a:0:{}', 'customer'),
+(6, 'user', 'user', 'user@user.pl', 'user@user.pl', 1, NULL, '$2y$13$Kc1YBhXzyH/bLWnVCdv/ueJJfDQ3pfbPe5ww2f8WYR/dXIs7x8irK', '2017-01-14 10:23:41', NULL, NULL, 'a:0:{}', 'customer'),
 (7, 'employee', 'employee', 'employee@employee.pl', 'employee@employee.pl', 1, NULL, '$2y$13$V58HMuH/tG0agyRHdKVhkOHZdzmm.c5raEf4DU75HLbnHz4iCEhV6', '2017-01-05 09:58:32', NULL, NULL, 'a:0:{}', 'employee'),
-(8, 'manager', 'manager', 'manager@manager.pl', 'manager@manager.pl', 1, NULL, '$2y$13$nvc1YW3JL7ZvAgAkMyJ9b.LS7eo8Q9cQlMcHly8xVqH3RseroawB2', '2017-01-07 10:03:41', NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'customer'),
+(8, 'manager', 'manager', 'manager@manager.pl', 'manager@manager.pl', 1, NULL, '$2y$13$nvc1YW3JL7ZvAgAkMyJ9b.LS7eo8Q9cQlMcHly8xVqH3RseroawB2', '2017-01-14 10:25:51', NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'customer'),
 (9, 'manager2', 'manager2', 'manager2@manager.pl', 'manager2@manager.pl', 1, NULL, '$2y$13$e8CjueQ1CbyYa7mDfjj7OeUOk6kHcoIBLrt3JjiuHApKEDej/kR.K', NULL, NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'customer'),
 (10, 'test', 'test', 'test@manager.pl', 'test@manager.pl', 1, NULL, '$2y$13$Gy.8O0pnJMCqmXS2liMDDOn5IcaRuDNS00GEaBKHPV1ZWLVVeuzD2', NULL, NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'customer'),
 (11, 'user2', 'user2', 'user2@user.pl', 'user2@user.pl', 1, NULL, '$2y$13$vDIeXWMaMwG50hle89neAO48bo7u5/nmXUDPPfy1n68amWWW6eWDy', NULL, NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'customer'),
@@ -136,7 +142,7 @@ INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_
 (13, 'test3', 'test3', 'test3@user.pl3', 'test3@user.pl3', 1, NULL, '$2y$13$xToDX7yxyHcjf6pnSynW5OVaDYyd.rk3iSIztDev5//TT6C9Sewb2', NULL, NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'customer'),
 (14, 'test4', 'test4', 'test4@user.pl3', 'test4@user.pl3', 1, NULL, '$2y$13$pAfE/YEKIMCwnk7WscDadu2misxJVrfAk3hcLy0p17XWKnEqH8bE6', NULL, NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'customer'),
 (15, 'test5', 'test5', 'test5@user.pl', 'test5@user.pl', 1, NULL, '$2y$13$LyQVlB9.uJFCOy57yf4InuGFJpI26SiqN.0Sly5Ul4meTCQIoJOgC', NULL, NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'customer'),
-(16, 'admin', 'admin', 'admin@admin.pl', 'admin@admin.pl', 1, NULL, '$2y$13$kw/1FO.uSfTPeirsmeRghudgZQbRQgTRzOVDuX9EnUUGFeJ8gicA.', '2017-01-09 08:50:16', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}', 'employee'),
+(16, 'admin', 'admin', 'admin@admin.pl', 'admin@admin.pl', 1, NULL, '$2y$13$kw/1FO.uSfTPeirsmeRghudgZQbRQgTRzOVDuX9EnUUGFeJ8gicA.', '2017-01-11 21:42:36', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}', 'employee'),
 (17, 'mechanic2', 'mechanic2', 'mechanic2@mechanic.pl', 'mechanic2@mechanic.pl', 1, NULL, '$2y$13$sPuVCC11F/ujo6c4.qxPdODjewABz7.R7PFRomnQwXO89UvjifEbW', NULL, NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_MECHANIC\";}', 'employee'),
 (18, 'manager5', 'manager5', 'manager5@manager5.pl', 'manager5@manager5.pl', 1, NULL, '$2y$13$RvofkeardPnFM5x6YR7hB.SP7bxAH0s0I9wuTXpbqzRGB9A4cwg0S', NULL, NULL, NULL, 'a:1:{i:0;s:12:\"ROLE_MANAGER\";}', 'employee'),
 (19, 'mechanic4', 'mechanic4', 'mechanic4@mechanic.pl', 'mechanic4@mechanic.pl', 1, NULL, '$2y$13$jvy55GTQANuibq/53sEL2uDGf8zbGBEDbwkxBTm2Dh3sRe5fArDwm', NULL, NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_MECHANIC\";}', 'employee');
@@ -158,20 +164,21 @@ CREATE TABLE `motorcycle` (
   `year` int(11) DEFAULT NULL,
   `mileage` int(11) DEFAULT NULL,
   `status` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `userId` int(11) DEFAULT NULL
+  `customerId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Zrzut danych tabeli `motorcycle`
 --
 
-INSERT INTO `motorcycle` (`id`, `type`, `make`, `model`, `capacity`, `regPlate`, `vin`, `year`, `mileage`, `status`, `userId`) VALUES
-(1, 'motocykl', 'Honda', 'CBF', 499, 'WB8885', 'ZCPCZ', 2004, 85000, 'aktywny', 6),
+INSERT INTO `motorcycle` (`id`, `type`, `make`, `model`, `capacity`, `regPlate`, `vin`, `year`, `mileage`, `status`, `customerId`) VALUES
+(1, 'motocykl', 'Honda', 'CBF', 499, 'WB8885', 'ZCPCZ', 2004, 88000, 'aktywny', 6),
 (4, 'motocykl', 'Honda', 'CBF', 499, 'WB8885A', 'ZCPC34', 2004, 85000, 'aktywny', 6),
 (6, 'motocykl', 'Honda', 'CBF', 499, 'WB8885Aa', 'ZCPC34a', 2004, 85000, 'aktywny', 6),
 (7, 'motocykl', 'Honda', 'CBF', 499, 'WB8885Aaa', 'ZCPC34aa', 2004, 86000, 'aktywny', 6),
 (9, 'motocykl', 'Honda', 'CBF', 499, 'WA8885Aaaa', 'ZCPC34aaa', 2004, 85000, 'aktywny', 6),
-(10, 'motocykl', 'Honda', 'CB', 500, 'WA', 'JH2', 1999, 1000000, 'Aktywny', 6);
+(10, 'motocykl', 'Honda', 'CB', 500, 'WA', 'JH2', 1999, 1000000, 'Aktywny', 6),
+(11, 'motocykl', 'Yamaha', 'YBR', 249, 'WZ4825', 'YBZ2CPD', 2007, 25426, 'aktywny', 13);
 
 -- --------------------------------------------------------
 
@@ -189,6 +196,7 @@ CREATE TABLE `order_status` (
 --
 
 INSERT INTO `order_status` (`id`, `name`) VALUES
+(8, 'anulowane'),
 (6, 'Do odbioru'),
 (5, 'Gotowe'),
 (4, 'Oczekujące'),
@@ -216,7 +224,12 @@ CREATE TABLE `parts` (
 --
 
 INSERT INTO `parts` (`id`, `name`, `price`, `quantity`, `serviceOrder`) VALUES
-(1, 'cześć', 60, 2, 2);
+(1, 'cześć', 60, 2, 2),
+(2, 'klocki hamulcowe', 150, 2, 3),
+(3, 'jakaś część 1', 25, 2, 4),
+(4, 'fsdf', 0, 2, 5),
+(5, 'fasfds', 2, 2, 6),
+(6, 'asd', 2, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -227,8 +240,6 @@ INSERT INTO `parts` (`id`, `name`, `price`, `quantity`, `serviceOrder`) VALUES
 CREATE TABLE `service_order` (
   `id` int(11) NOT NULL,
   `motorcycle` int(11) DEFAULT NULL,
-  `mechanic` int(11) DEFAULT NULL,
-  `manager` int(11) DEFAULT NULL,
   `startDate` datetime NOT NULL,
   `endDate` datetime NOT NULL,
   `dateOfAcceptance` datetime DEFAULT NULL,
@@ -237,16 +248,23 @@ CREATE TABLE `service_order` (
   `userComments` longtext COLLATE utf8_unicode_ci,
   `managerComments` longtext COLLATE utf8_unicode_ci,
   `mechanicComments` longtext COLLATE utf8_unicode_ci,
-  `orderStatus` int(11) DEFAULT NULL
+  `orderStatusId` int(11) DEFAULT NULL,
+  `mechanic_id` int(11) DEFAULT NULL,
+  `manager_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Zrzut danych tabeli `service_order`
 --
 
-INSERT INTO `service_order` (`id`, `motorcycle`, `mechanic`, `manager`, `startDate`, `endDate`, `dateOfAcceptance`, `dateOfRelase`, `mileage`, `userComments`, `managerComments`, `mechanicComments`, `orderStatus`) VALUES
-(1, 1, 7, 7, '2014-03-04 17:15:00', '2015-05-13 16:00:00', '2015-03-17 16:00:00', '2021-10-21 16:15:00', 85000, 'Nie ruszaj instalacji elektrycznej', 'motocykl przy przyjęciu ma uszkodzony zbiornik', NULL, 1),
-(2, 7, 17, 18, '2017-01-09 09:15:00', '2017-01-09 09:00:00', '2017-01-09 09:00:00', '2017-01-09 09:00:00', 86000, 'komentarz użytkownika', 'komentarz managera', NULL, 2);
+INSERT INTO `service_order` (`id`, `motorcycle`, `startDate`, `endDate`, `dateOfAcceptance`, `dateOfRelase`, `mileage`, `userComments`, `managerComments`, `mechanicComments`, `orderStatusId`, `mechanic_id`, `manager_id`) VALUES
+(1, 1, '2014-03-04 17:15:00', '2015-05-13 16:00:00', '2017-01-09 20:14:13', '2021-10-21 16:15:00', 85428, 'Nie ruszaj instalacji elektrycznej', 'motocykl przy przyjęciu ma uszkodzony zbiornik', NULL, 2, 19, 18),
+(2, 7, '2017-01-09 09:15:00', '2017-01-09 09:00:00', '2017-01-09 09:00:00', '2017-01-09 09:00:00', 86000, 'komentarz użytkownika', 'komentarz managera', NULL, 2, 19, 18),
+(3, 1, '2017-01-09 14:15:00', '2017-01-09 14:15:00', '2017-01-09 20:18:30', '2017-01-09 14:15:00', 88000, 'komentarz', 'zmieniony przebieg', NULL, 2, 19, 18),
+(4, 11, '2017-01-12 09:55:13', '2017-01-10 12:30:00', '2017-01-10 12:30:00', '2017-01-10 12:30:00', 25426, 'jakiś komentarz', 'komentarz managera', 'jakiś komentarz', 6, 19, 18),
+(5, 1, '2017-01-10 19:00:00', '2017-01-10 19:15:00', '2017-01-10 19:15:00', '2017-01-10 19:45:00', 88000, NULL, NULL, NULL, 1, 19, 18),
+(6, 6, '2017-01-11 21:30:00', '2017-01-11 21:30:00', '2017-01-11 21:15:00', '2017-01-11 21:30:00', 85000, NULL, NULL, NULL, 1, 17, 18),
+(7, 4, '2017-01-12 00:15:00', '2017-01-12 00:00:00', '2017-01-12 00:15:00', '2017-01-12 00:15:00', 85000, NULL, NULL, NULL, 1, 17, 18);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -287,7 +305,7 @@ ALTER TABLE `motorcycle`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_21E380E131551A66` (`regPlate`),
   ADD UNIQUE KEY `UNIQ_21E380E1B1085141` (`vin`),
-  ADD KEY `IDX_21E380E164B64DCC` (`userId`);
+  ADD KEY `IDX_21E380E1F17FD7A5` (`customerId`);
 
 --
 -- Indexes for table `order_status`
@@ -309,9 +327,9 @@ ALTER TABLE `parts`
 ALTER TABLE `service_order`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_5C5B7E7F21E380E1` (`motorcycle`),
-  ADD KEY `IDX_5C5B7E7F7137DE79` (`mechanic`),
-  ADD KEY `IDX_5C5B7E7FFA2425B9` (`manager`),
-  ADD KEY `IDX_5C5B7E7F750AF84B` (`orderStatus`);
+  ADD KEY `IDX_5C5B7E7F9A67DB00` (`mechanic_id`),
+  ADD KEY `IDX_5C5B7E7F783E3463` (`manager_id`),
+  ADD KEY `IDX_5C5B7E7F8A56DA18` (`orderStatusId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -321,7 +339,7 @@ ALTER TABLE `service_order`
 -- AUTO_INCREMENT dla tabeli `actions`
 --
 ALTER TABLE `actions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT dla tabeli `fos_user`
 --
@@ -331,22 +349,22 @@ ALTER TABLE `fos_user`
 -- AUTO_INCREMENT dla tabeli `motorcycle`
 --
 ALTER TABLE `motorcycle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT dla tabeli `order_status`
 --
 ALTER TABLE `order_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT dla tabeli `parts`
 --
 ALTER TABLE `parts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT dla tabeli `service_order`
 --
 ALTER TABLE `service_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Ograniczenia dla zrzutów tabel
 --
@@ -373,7 +391,7 @@ ALTER TABLE `employee`
 -- Ograniczenia dla tabeli `motorcycle`
 --
 ALTER TABLE `motorcycle`
-  ADD CONSTRAINT `FK_21E380E164B64DCC` FOREIGN KEY (`userId`) REFERENCES `customer` (`id`);
+  ADD CONSTRAINT `FK_21E380E1F17FD7A5` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`);
 
 --
 -- Ograniczenia dla tabeli `parts`
@@ -386,9 +404,9 @@ ALTER TABLE `parts`
 --
 ALTER TABLE `service_order`
   ADD CONSTRAINT `FK_5C5B7E7F21E380E1` FOREIGN KEY (`motorcycle`) REFERENCES `motorcycle` (`id`),
-  ADD CONSTRAINT `FK_5C5B7E7F7137DE79` FOREIGN KEY (`mechanic`) REFERENCES `employee` (`id`),
-  ADD CONSTRAINT `FK_5C5B7E7F750AF84B` FOREIGN KEY (`orderStatus`) REFERENCES `order_status` (`id`),
-  ADD CONSTRAINT `FK_5C5B7E7FFA2425B9` FOREIGN KEY (`manager`) REFERENCES `employee` (`id`);
+  ADD CONSTRAINT `FK_5C5B7E7F783E3463` FOREIGN KEY (`manager_id`) REFERENCES `employee` (`id`),
+  ADD CONSTRAINT `FK_5C5B7E7F8A56DA18` FOREIGN KEY (`orderStatusId`) REFERENCES `order_status` (`id`),
+  ADD CONSTRAINT `FK_5C5B7E7F9A67DB00` FOREIGN KEY (`mechanic_id`) REFERENCES `employee` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

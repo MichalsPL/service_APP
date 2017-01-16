@@ -372,13 +372,13 @@
          */
         public function showOrdersByStatusAction($statusId) {
             $em = $this->getDoctrine()->getManager();
-            $query = $em->createQuery('SELECT s FROM ServiceBundle:ServiceOrder s WHERE s.orderStatus = '
+            $query = $em->createQuery('SELECT s FROM ServiceBundle:ServiceOrder s WHERE s.orderStatusId = '
                     . $statusId . 'ORDER BY s.id');
             $allOrders = $query->getResult();
             $orders = [];
             foreach ($allOrders as $order) {
-                $orderName = $order->getOrderStatusId()->getName();
-                $order->setOrderStatus($orderName);
+                $orderNew= $order->getOrderStatusId();
+                $order->setOrderStatusId($orderNew);
                 $orders[] = $order;
             }
 
